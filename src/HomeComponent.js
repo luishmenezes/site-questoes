@@ -4,7 +4,7 @@ const HomeComponent = () => {
 return (
     <div style={{textAlign:'center'}}>
         <h1>Home</h1>
-        <p>Esta é a pagina home!!!!</p>
+        <p>Esta é a pagina home!</p>
     </div>
 );
 }
