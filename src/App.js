@@ -6,7 +6,8 @@ import {
   InfoCircleOutlined,
   FilterOutlined,
   BookOutlined,
-  SettingOutlined
+  SettingOutlined,
+  BookFilled
 } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
@@ -15,6 +16,7 @@ import SobreComponent from './components/sobre/SobreComponent';
 import SimuladosComponent from './components/simulados/SimuladosComponent';
 import QuestionsComponent from './components/questions/QuestionsComponent';
 import ConfigComponent from './components/configuracao/ConfigComponent';
+import MinhasQuestoesComponent from './components/minhasQuestoes/MinhasQuestoesComponent';
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -34,6 +36,11 @@ const App = () => {
       icon: <BookOutlined />,
       label:  <Link to="/questoes">Questões</Link>,
       
+    },
+    {
+      key: 'minhasQuestoes',
+      icon: <BookFilled />,
+      label: <Link to = "/minhasQuestoes">Minhas questões</Link>
     },
     {
       key: 'simulados',
@@ -86,6 +93,7 @@ const App = () => {
             <Route path="/sobre" element={<SobreComponent />} />
             <Route path="/simulados" element={<SimuladosComponent/>}/>
             <Route path="/questoes" element={<QuestionsComponent/>} />
+            <Route path="/minhasQuestoes" element={<MinhasQuestoesComponent/>} />
             <Route path="/config" element={<ConfigComponent/>} />
           </Routes>
         </div>
