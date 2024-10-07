@@ -105,3 +105,42 @@ body {
   top: 0;
   transition: 0.3s;
 }
+.profile-container {
+  display: flex;
+  flex-wrap: wrap; 
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  gap: 30px;
+
+}
+
+.profile-card {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.profile-img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.read-more {
+  background: none;
+  border: none;
+  color: rgb(191, 191, 199);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.read-more:hover {
+  color: darkblue;
+}
