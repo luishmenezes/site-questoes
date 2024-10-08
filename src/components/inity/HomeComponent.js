@@ -43,6 +43,7 @@ const HomeComponent = () => {
       </nav>
 
       <div className="main-content">
+        <div className='contentin'>
         <div className="text-section">
           <h1>Educa+</h1>
           <p>
@@ -57,6 +58,7 @@ const HomeComponent = () => {
           <p>Lorem ipsum dolor sit amet et delectus</p>
           <button>Button</button>
         </div>
+      </div>
       </div>
 
       <div className="toggle-switch">

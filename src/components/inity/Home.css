@@ -27,6 +27,13 @@ body {
   font-size: 1.2em;
   cursor: pointer;
 }
+.contentin{
+  display: flex;
+  gap: 20px;
+  justify-content: space-around;
+  align-items: center;
+  margin: 40px ;
+}
 
 .main-content {
   display: flex;
