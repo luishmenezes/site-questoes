@@ -7,20 +7,16 @@ import {
   FilterOutlined,
   BookOutlined,
   SettingOutlined,
-  BookFilled
+  BookFilled,
+  LoginOutlined
 } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import HomeComponent from './components/inity/HomeComponent';
-import SobreComponent from './components/sobre/SobreComponent';
-import SimuladosComponent from './components/simulados/SimuladosComponent';
-import QuestionsComponent from './components/questions/QuestionsComponent';
-import ConfigComponent from './components/configuracao/ConfigComponent';
-import MinhasQuestoesComponent from './components/minhasQuestoes/MinhasQuestoesComponent';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import RouterConfig from './RouterConfig';
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
-  
+
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
@@ -34,18 +30,17 @@ const App = () => {
     {
       key: 'questoes',
       icon: <BookOutlined />,
-      label:  <Link to="/questoes">Questões</Link>,
-      
+      label: <Link to="/questoes">Questões</Link>,
     },
     {
       key: 'minhasQuestoes',
       icon: <BookFilled />,
-      label: <Link to = "/minhasQuestoes">Minhas questões</Link>
+      label: <Link to="/minhasQuestoes">Minhas questões</Link>,
     },
     {
       key: 'simulados',
       icon: <FilterOutlined />,
-      label: <Link to="/simulados">Simulados</Link>
+      label: <Link to="/simulados">Simulados</Link>,
     },
     {
       key: 'sobre',
@@ -53,11 +48,15 @@ const App = () => {
       label: <Link to="/sobre">Sobre</Link>,
     },
     {
+      key: 'cadastros',
+      icon: <LoginOutlined />,
+      label: <Link to="/cadastros">Cadastros</Link>,
+    },
+    {
       key: 'config',
       icon: <SettingOutlined />,
-      label: <Link to="/config">Configurações</Link>
-    }
- 
+      label: <Link to="/config">Configurações</Link>,
+    },
   ];
 
   return (
@@ -88,14 +87,8 @@ const App = () => {
         </div>
 
         <div style={{ flex: 1, padding: '20px' }}>
-          <Routes>
-            <Route path="/home" element={<HomeComponent />} />
-            <Route path="/sobre" element={<SobreComponent />} />
-            <Route path="/simulados" element={<SimuladosComponent/>}/>
-            <Route path="/questoes" element={<QuestionsComponent/>} />
-            <Route path="/minhasQuestoes" element={<MinhasQuestoesComponent/>} />
-            <Route path="/config" element={<ConfigComponent/>} />
-          </Routes>
+          {/* Aqui você usa o componente de rotas que criamos */}
+          <RouterConfig />
         </div>
       </div>
     </Router>
