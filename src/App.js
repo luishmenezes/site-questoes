@@ -57,6 +57,10 @@ const App = () => {
       icon: <SettingOutlined />,
       label: <Link to="/config">Configurações</Link>,
     },
+    {
+      key: 'login',
+      label: <Link to="/login">Login</Link>
+    }
   ];
 
   return (

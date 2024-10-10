@@ -1,27 +1,29 @@
-import React from 'react';
-import { Card, Space, Button, Checkbox, Form, Input } from 'antd';
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Card, Space, Button, Checkbox, Form, Input } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 
-const App = () => {
-  const navigate = useNavigate(); 
+const LoginComponent = () => {
+  const navigate = useNavigate();
 
   const onFinish = (values) => {
-    console.log('Success:', values);
-    navigate("/home"); 
+    console.log("Success:", values);
+    navigate("/home");
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
-  return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh'
-    }}>
-      <Space style={{ textAlign: 'center' }} direction="vertical" size={16}>
+  return (  
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Space style={{ textAlign: "center" }} direction="vertical" size={16}>
         <Card
           headStyle={{
             borderBottom: "2px solid black",
@@ -52,31 +54,6 @@ const App = () => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-            <Form.Item
-              label="Usuário"
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: 'Por favor, preencha o campo!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Instituição"
-              name="institution"
-              rules={[
-                {
-                  required: true,
-                  message: 'Por favor, preencha o campo!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
 
             <Form.Item
               label="Email"
@@ -84,7 +61,7 @@ const App = () => {
               rules={[
                 {
                   required: true,
-                  message: 'Por favor, preencha o campo!',
+                  message: "Por favor, preencha o campo!",
                 },
               ]}
             >
@@ -97,7 +74,7 @@ const App = () => {
               rules={[
                 {
                   required: true,
-                  message: 'Por favor, preencha o campo!',
+                  message: "Por favor, preencha o campo!",
                 },
               ]}
             >
@@ -112,9 +89,7 @@ const App = () => {
                 span: 16,
               }}
             >
-              <Checkbox
-                style={{ position: 'relative', right: '-60px' }}
-              >
+              <Checkbox style={{ position: "relative", right: "-60px" }}>
                 Aceito as políticas de privacidade
               </Checkbox>
             </Form.Item>
@@ -124,11 +99,16 @@ const App = () => {
                 offset: 0,
                 span: 24,
               }}
-              style={{ textAlign: 'center' }}
+              style={{ textAlign: "center" }}
             >
               <Button type="primary" htmlType="submit">
-                Cadastre-se
-              </Button>
+                Login
+              </Button> 
+              <br /><br /><br />    
+
+              <Link to="/redefenir">Esqueceu a senha?</Link>
+              
+              
             </Form.Item>
           </Form>
         </Card>
@@ -137,4 +117,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default LoginComponent;

@@ -9,6 +9,9 @@ import MinhasQuestoesComponent from './components/minhasQuestoes/MinhasQuestoesC
 import CadastrosComponent from './components/ocupacao/OcupacaoComponent';
 import CadastroAlunoComponent from './components/cadastros/aluno/CadastroAlunoComponent';
 import CadastroProfessorComponent from './components/cadastros/professor/CadastroProfessorComponent';
+import LoginComponent from './components/login/LoginComponent';
+import RedefenirSenhaComponent from './components/redefenirsenha/RedefenirSenhaComponent';
+
 
 const RouterConfig = () => {
   return (
@@ -22,6 +25,9 @@ const RouterConfig = () => {
       <Route path="/cadastros" element={<CadastrosComponent />} />
       <Route path="/formaluno" element={<CadastroAlunoComponent />} />
       <Route path="/formprofessor" element={<CadastroProfessorComponent />} />
+      <Route path="/login" element={<LoginComponent/>} />
+      <Route path="/redefenir" element={<RedefenirSenhaComponent/>} />
+      
     </Routes>
   );
 };
