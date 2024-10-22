@@ -1,13 +1,46 @@
 import React from 'react';
 import { Card, Space, Button, Checkbox, Form, Input } from 'antd';
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import axios from 'axios';
 
 const App = () => {
   const navigate = useNavigate(); 
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
-    navigate("/home"); 
+  const [nome, setNome] = useState('');  
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [dataNascimento, setDataNascimento] = useState('')
+
+  const handleEnviar = async () => {
+    const data = {
+      nome: nome.toString(), 
+      email: email.toString(),
+      senha: senha.toString(),
+      dataNascimento: dataNascimento.toString(),
+    };
+
+    try {
+      const response = await axios.post('http://localhost:8080/usuarios/cadastro', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      if (response.status === 200) {
+        console.log('Cadastrado com sucesso');
+        console.log(data);
+        navigate("/home");
+      } else {
+        console.error('Erro ao cadastrar');
+      }
+    } catch (error) {
+      console.error('Erro na requisição', error);
+    }
+  };
+
+  const onFinish = () => {
+    handleEnviar();  
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -62,21 +95,28 @@ const App = () => {
                 },
               ]}
             >
-              <Input />
+              <Input
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+              />
             </Form.Item>
 
-            <Form.Item
+            {/*
+                        <Form.Item
               label="Instituição"
               name="institution"
               rules={[
                 {
-                  required: true,
                   message: 'Por favor, preencha o campo!',
                 },
               ]}
             >
-              <Input />
-            </Form.Item>
+              <Input
+                value={institution}
+                onChange={(e) => setInstitution(e.target.value)}
+              />
+            </Form.Item>*/}
+            
 
             <Form.Item
               label="Email"
@@ -88,7 +128,10 @@ const App = () => {
                 },
               ]}
             >
-              <Input />
+              <Input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </Form.Item>
 
             <Form.Item
@@ -101,7 +144,26 @@ const App = () => {
                 },
               ]}
             >
-              <Input.Password />
+              <Input.Password 
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="Data Nascimento"
+              name="date"
+              rules={[
+                {
+                  required: true,
+                  message: 'Por favor, preencha o campo!',
+                },
+              ]}
+            >
+              <Input 
+                value={dataNascimento}
+                onChange={(e) => setDataNascimento(e.target.value)}
+              />
             </Form.Item>
 
             <Form.Item
@@ -126,7 +188,7 @@ const App = () => {
               }}
               style={{ textAlign: 'center' }}
             >
-              <Button type="primary" htmlType="submit">
+              <Button onClick={handleEnviar} type="primary" htmlType="submit">
                 Cadastre-se
               </Button>
             </Form.Item>
