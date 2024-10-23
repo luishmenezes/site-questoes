@@ -68,8 +68,9 @@ const App = () => {
       <div style={{ display: 'flex', height: '100vh' }}>
         <div
           style={{
-            width: 256,
+            width: collapsed ? 80 : 256,
             backgroundColor: '#001529',
+            transition: 'width 0.2s',
           }}
         >
           <Button
@@ -90,7 +91,7 @@ const App = () => {
           />
         </div>
 
-        <div style={{ flex: 1, padding: '20px' }}>
+        <div style={{ flex: 1, padding: '20px', backgroundColor: '#011C40' }}>
           {/* Aqui você usa o componente de rotas que criamos */}
           <RouterConfig />
         </div>
