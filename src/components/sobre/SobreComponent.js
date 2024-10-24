@@ -1,58 +1,98 @@
-import React, { useState } from 'react';
-import './Sobre.css';
+import React from "react";
+import { Card, Col, Row } from "antd";
 
-const InfoCard = ({ title, content }) => {
-    const [isExpanded, setIsExpanded] = useState(false);
+const SobreComponent = () => {
+  return (
+    <div
+      style={{
+        backgroundColor: "#0477bf",
+        minHeight: "100vh",
+        width: `calc(100% - 256px)`,
+        position: "absolute",
+        top: 0,
+        left: 255,
+        padding: "50px",
+        boxSizing: "border-box",
+        zIndex: 1,
+      }}
+    >
+      <div
+        className="titleDes"
+        style={{ textAlign: "center", color: "white", marginBottom: "50px" }}
+      >
+        <h1>Sobre a Educa+</h1>
+        <p style={{ maxWidth: "600px", margin: "0 auto", fontSize: "18px" }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
 
-    const toggleContent = () => {
-        setIsExpanded(!isExpanded);
-    };
-
-    return (
-        <div className="info-card">
-            <h2>{title}</h2>
-            <p>{isExpanded ? content : `${content.substring(0, 100)}...`}</p>
-            <button onClick={toggleContent} className="read-more">
-                {isExpanded ? "Fechar" : "Ler mais"}
-            </button>
-        </div>
-    );
+      <Row gutter={[16, 16]} justify="center">
+        <Col xs={24} sm={8}>
+          <Card
+            title="Nossa Missão"
+            bordered={false}
+            style={{ borderRadius: "45px", textAlign: "center" }}
+          >
+            <p>
+              <b>
+                <i>Compromisso:</i>
+              </b>{" "}
+              Educação de qualidade e acessível. <br />
+              <b>
+                <i>Inovação:</i>
+              </b>{" "}
+              Uso de tecnologia para aprimorar o ensino. <br />
+              <b>
+                <i>Inclusão:</i>
+              </b>{" "}
+              Um ambiente acolhedor e democrático. <br />
+              <b>
+                <i>Excelência:</i>
+              </b>{" "}
+              Ensino com professores qualificados. <br />
+              <b>
+                <i>Transparência:</i>
+              </b>{" "}
+              Relação de confiança com os alunos. <br />
+            </p>
+            <a href="#">Ler mais</a>
+          </Card>
+        </Col>
+        <Col xs={24} sm={8}>
+          <Card
+            title="Nossa Visão"
+            bordered={false}
+            style={{ borderRadius: "45px", textAlign: "center" }}
+          >
+            <p>
+              Ser a plataforma de referência no Brasil em preparação para o ENEM
+              e concursos, <br />
+              reconhecida por democratizar o acesso ao ensino de qualidade e
+              capacitar os alunos <br />a atingirem seus objetivos acadêmicos e
+              profissionais.
+            </p>
+            <a href="#">Ler mais</a>
+          </Card>
+        </Col>
+        <Col xs={24} sm={8}>
+          <Card
+            title="Nossos Valores"
+            bordered={false}
+            style={{ borderRadius: "45px", textAlign: "center" }}
+          >
+            <p>
+              Nossa missão é oferecer um ambiente de aprendizado completo e
+              acessível, <br />
+              combinando tecnologia, metodologia de ensino eficiente e o suporte
+              de professores especializados e qualificados. <br /> 
+            </p>
+            <a href="#">Ler mais</a>
+          </Card>
+        </Col>
+      </Row>
+    </div>
+  );
 };
 
-const AboutComponent = () => {
-    return (
-        <div className="about-container">
-            <nav className="navbar">
-                <ul>
-                    <li>Home</li>
-                    <li>Explore</li>
-                    <li>Provas</li>
-                </ul>
-            </nav>
-
-            <div className="main-content">
-                <h1>Sobre a Educa+</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet consectetur adipiscing elit ut aliquam purus sit.
-                </p>
-
-                <div className="info-section">
-                    <InfoCard
-                        title="Nossa Missão"
-                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis auctor elit sed vulputate mi sit amet. Sed adipiscing diam donec adipiscing tristique risus nec feugiat in fermentum. Elit eget gravida cum sociis natoque penatibus et magnis dis parturient. Ac auctor augue mauris augue neque gravida in fermentum et sollicitudin."
-                    />
-                    <InfoCard
-                        title="Nossa Visão"
-                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis auctor elit sed vulputate mi sit amet mauris commodo. Nulla facilisi etiam dignissim diam quis enim lobortis scelerisque. Ultrices sagittis orci a scelerisque purus semper. Cras fermentum odio eu feugiat pretium nibh ipsum. Varius vel pharetra vel turpis nunc eget lorem dolor. Nulla aliquet enim tortor at auctor urna nunc id."
-                    />
-                    <InfoCard
-                        title="Nossos Valores"
-                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus scelerisque eleifend donec pretium vulputate sapien nec. Quis viverra nibh cras pulvinar mattis nunc. Sit amet consectetur adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla facilisi."
-                    />
-                </div>
-            </div>
-        </div>
-    );
-};
-
-export default AboutComponent;
+export default SobreComponent;
