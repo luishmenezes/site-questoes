@@ -23,11 +23,11 @@ yarn-debug.log*
 yarn-error.log*
 
 #ordem de git antes de iniciar (((((((((((QUALQUER COISA)))))))))))
-git pull origin ou master (Conferir);
+git pull origin master
 git checkout -b nova-feature;
 git add . ;
 git commit -m "Descrição das alterações";
 git push origin nova-feature;
-git checkout ou master (Conferir);
+git checkout master
 git merge nova-feature;
-git push origin main ou master (Conferir);
+git push origin master
