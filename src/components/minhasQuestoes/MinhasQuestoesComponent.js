@@ -23,16 +23,12 @@ const MinhasQuestoesComponent = () => {
 
     const apiUrl = "http://localhost:8080/serviceIA/processar-pdf";
 
-    axios.post(apiUrl, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    axios.post(apiUrl, formData)
       .then((response) => {
         console.log("Sucesso:", response.data);
       })
       .catch((error) => {
-        console.error("Erro:", error);
+        console.error("Erro:", error.response || error.message || error);
       });
   };
 
