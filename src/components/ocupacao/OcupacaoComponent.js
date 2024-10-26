@@ -12,7 +12,7 @@ const Home = () => {
       <div className="cardContainer">
         <div className="ant-card">
           <img
-            src={`${process.env.PUBLIC_URL}/Aluno.png`}
+            src={`${process.env.PUBLIC_URL}/ALUNO.png`}
             alt="Aluno"
             className="card-image"
           />
