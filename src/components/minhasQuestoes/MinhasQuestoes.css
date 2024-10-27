@@ -1,0 +1,97 @@
+.scanner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scanner-icon {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.scanner-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(#0349A6, #012350, #011C40);
+    min-height: 100vh;
+    padding: 20px;
+    gap: 20px;
+}
+
+.foto {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.questoes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+}
+
+.questao-card {
+    background-color: #0062cc;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lista-de {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+
+.perfil {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.foto-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: #c4c4c4;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.nome {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+}
+
+
+.acessar-button {
+    background-color: #00ff00;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
