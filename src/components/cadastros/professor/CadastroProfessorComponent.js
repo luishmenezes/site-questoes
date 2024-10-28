@@ -5,10 +5,34 @@ import { useNavigate } from "react-router-dom";
 const App = () => {
   const navigate = useNavigate(); 
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
-    navigate("/home"); 
-  };
+  const onFinish = async (values) => {
+    try {
+      const response = await fetch ('https://bancodequestoes.onrender.com/professor/cadastro', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({
+          nome: values.username,
+          email: values.email,
+          senha: values.password,
+          dataNascimento: values.dataNascimento.format('YYYY-MM-DD')
+        })
+      });
+
+      if(response.ok){
+        console.log('Cadastro realizado com sucesso!');
+        navigate("/home");
+      } else {
+        console.log('Erro no cadastro')
+      }
+    } catch(error){
+      console.log('Erro ao realizar a requisição', error);
+    }
+
+    }
+  ;
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -94,6 +118,19 @@ const App = () => {
             <Form.Item
               label="Instituição"
               name="institution"
+              rules={[
+                {
+                  required: true,
+                  message: 'Por favor, preencha o campo!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="data de nascimento"
+              name="dataNascimento"
               rules={[
                 {
                   required: true,
