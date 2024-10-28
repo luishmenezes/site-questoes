@@ -1,14 +1,38 @@
 import React from 'react';
-import { Card, Space, Button, Checkbox, Form, Input } from 'antd';
+import { Card, Space, Button, Checkbox, Form, Input, DatePicker } from 'antd';
 import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const navigate = useNavigate(); 
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
-    navigate("/home"); 
-  };
+  const onFinish = async (values) => {
+    try {
+      const response = await fetch ('https://bancodequestoes.onrender.com/professor/cadastro', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({
+          nome: values.username,
+          email: values.email,
+          senha: values.password,
+          dataNascimento: values.dataNascimento.format('YYYY-MM-DD')
+        })
+      });
+
+      if(response.ok){
+        console.log('Cadastro realizado com sucesso!');
+        navigate("/home");
+      } else {
+        console.log('Erro no cadastro')
+      }
+    } catch(error){
+      console.log('Erro ao realizar a requisição', error);
+    }
+
+    }
+  ;
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -103,6 +127,20 @@ const App = () => {
             >
               <Input />
             </Form.Item>
+
+            <Form.Item
+              label="Data de Nascimento"
+              name="dataNascimento"
+              rules={[
+                {
+                  required: true,
+                  message: 'Por favor, selecione uma data!',
+                },
+              ]}
+            >
+              <DatePicker />
+            </Form.Item>
+
 
             <Form.Item
               label="Email"
