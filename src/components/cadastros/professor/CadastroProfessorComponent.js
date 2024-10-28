@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Space, Button, Checkbox, Form, Input } from 'antd';
+import { Card, Space, Button, Checkbox, Form, Input, DatePicker } from 'antd';
 import { useNavigate } from "react-router-dom";
 
 const App = () => {
@@ -129,17 +129,18 @@ const App = () => {
             </Form.Item>
 
             <Form.Item
-              label="data de nascimento"
+              label="Data de Nascimento"
               name="dataNascimento"
               rules={[
                 {
                   required: true,
-                  message: 'Por favor, preencha o campo!',
+                  message: 'Por favor, selecione uma data!',
                 },
               ]}
             >
-              <Input />
+              <DatePicker />
             </Form.Item>
+
 
             <Form.Item
               label="Email"
