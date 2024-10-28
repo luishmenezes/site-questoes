@@ -19,11 +19,22 @@
     cursor: pointer;
 }
 
-.container {
+.mensagem-sucesso {
+    margin-top: 10px;
+    color: #28a745;
+    background-color: #e8f5e9;
+    padding: 8px 16px;
+    border: 1px solid #28a745;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.containerr {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: linear-gradient(#0349A6, #012350, #011C40);
+    background-image: linear-gradient( #012350 ,#0349A6,#011C40);
     min-height: 100vh;
     padding: 20px;
     gap: 20px;
@@ -60,7 +71,6 @@
     margin-bottom: 10px;
 }
 
-
 .perfil {
     background-color: #ffffff;
     padding: 10px;
@@ -84,7 +94,6 @@
     color: black;
 }
 
-
 .acessar-button {
     background-color: #00ff00;
     color: black;
@@ -95,3 +104,52 @@
     font-weight: bold;
     margin-top: 10px;
 }
+.mensagem-sucesso {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+    opacity: 1;
+}
+
+.mensagem-sucesso-hide {
+    opacity: 0;
+}
+.alert-mensagem {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    10%, 90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+

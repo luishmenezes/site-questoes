@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./MinhasQuestoes.css";
 import documentoImg from "../assets/documents.png";
 import axios from "axios";
 
 const MinhasQuestoesComponent = () => {
+  const [mensagemSucesso, setMensagemSucesso] = useState(false);
   const fileInputRef = useRef(null);
   const questoes = Array(8).fill({
     nome: "Carlos Alberto",
@@ -18,12 +19,16 @@ const MinhasQuestoesComponent = () => {
   };
 
   const handleUpload = (file) => {
+    setMensagemSucesso(true); 
+    setTimeout(() => setMensagemSucesso(false), 5000);
+
     const formData = new FormData();
     formData.append("file", file);
 
-    const apiUrl = "http://localhost:8080/serviceIA/processar-pdf";
+    const apiUrl = "https://bancodequestoes.onrender.com/serviceIA/processar-pdf";
 
-    axios.post(apiUrl, formData)
+    axios
+      .post(apiUrl, formData)
       .then((response) => {
         console.log("Sucesso:", response.data);
       })
@@ -37,7 +42,12 @@ const MinhasQuestoesComponent = () => {
   };
 
   return (
-    <div className="container">
+    <div className="containerr">
+      {mensagemSucesso && (
+        <div className="alert-mensagem">
+          Arquivo enviado com sucesso!
+        </div>
+      )}
       <div className="scanner">
         <img src={documentoImg} alt="Scanner Icon" className="scanner-icon" />
         <input
@@ -45,7 +55,7 @@ const MinhasQuestoesComponent = () => {
           accept="application/pdf"
           onChange={handleFileChange}
           ref={fileInputRef}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
         />
         <button className="scanner-button" onClick={triggerFileInput}>
           Scannerar Documento
