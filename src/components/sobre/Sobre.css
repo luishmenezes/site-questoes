@@ -9,15 +9,14 @@ body {
     margin-bottom: 50px;
 }
 
-.card-custom .ant-card-head {
-    border-bottom: 2px solid #0477bf; /* Cor da linha */
-}
-
-
 .card-custom {
     background-color: #ffffff; /* Fundo branco */
     border-radius: 45px; /* Mantém o raio do cartão */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+}
+
+.card-custom .ant-card-head {
+    border-bottom: 2px solid #0477bf; /* Linha entre título e descrição */
 }
 
 .read-more {

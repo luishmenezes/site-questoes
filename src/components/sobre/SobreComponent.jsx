@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Col, Row } from "antd";
-import './Sobre.css'; // Importa o arquivo CSS
+import './Sobre.css';
 
 const SobreComponent = () => {
     return (
