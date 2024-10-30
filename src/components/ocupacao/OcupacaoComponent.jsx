@@ -12,7 +12,7 @@ const Home = () => {
       <div className="cardContainer">
         <div className="ant-card">
           <img
-            src={`${process.env.PUBLIC_URL}/ALUNO.png`}
+            src={`${process.env.PUBLIC_URL}/rb_5836.png`}
             alt="Aluno"
             className="card-image"
           />
@@ -26,7 +26,7 @@ const Home = () => {
 
         <div className="ant-card">
           <img
-            src={`${process.env.PUBLIC_URL}/PROFESSOR.png`}
+            src={`${process.env.PUBLIC_URL}/rb_1638.png`}
             alt="Professor"
             className="card-image"
           />

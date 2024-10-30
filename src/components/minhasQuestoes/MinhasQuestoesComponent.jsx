@@ -42,7 +42,7 @@ const MinhasQuestoesComponent = () => {
   };
 
   return (
-    <div className="containerr">
+    <div className="container">
       {mensagemSucesso && (
         <div className="alert-mensagem">
           Arquivo enviado com sucesso!
@@ -57,19 +57,23 @@ const MinhasQuestoesComponent = () => {
           ref={fileInputRef}
           style={{ display: "none" }}
         />
-        <button className="scanner-button" onClick={triggerFileInput}>
+      </div>
+      <div className="button">
+        <button style={{ position: "relative", top: '-15px' }} className="scanner-button" onClick={triggerFileInput}>
           Scannerar Documento
         </button>
       </div>
       <div className="questoes-container">
         {questoes.map((questao, index) => (
           <div key={index} className="questao-card">
-            <p className="lista-de">Lista de</p>
-            <div className="perfil">
-              <img src={questao.foto} alt="Foto de perfil" className="foto" />
-              <p className="nome">{questao.nome}</p>
+            <div className="mini-card">
+              <p className="lista-de">Lista de</p>
+              <div className="perfil">
+                <img src={questao.foto} alt="Foto de perfil" className="foto" />
+                <p className="nome">{questao.nome}</p>
+              </div>
+              <button className="acessar-button">Acessar</button>
             </div>
-            <button className="acessar-button">Acessar</button>
           </div>
         ))}
       </div>
