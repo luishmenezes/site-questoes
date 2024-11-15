@@ -6,6 +6,7 @@ const QuestionsComponent = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
