@@ -1,9 +1,8 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom'; // Removido Router e Link
+import { Route, Routes } from 'react-router-dom'; 
 import HomeComponent from './components/inity/HomeComponent';
 import SobreComponent from './components/sobre/SobreComponent';
 import SimuladosComponent from './components/simulados/SimuladosComponent';
-import QuestionsComponent from './components/questions/QuestionsComponent';
 import ConfigComponent from './components/configuracao/ConfigComponent';
 import MinhasQuestoesComponent from './components/minhasQuestoes/MinhasQuestoesComponent';
 import CadastrosComponent from './components/ocupacao/OcupacaoComponent';
@@ -11,6 +10,7 @@ import CadastroAlunoComponent from './components/cadastros/aluno/CadastroAlunoCo
 import CadastroProfessorComponent from './components/cadastros/professor/CadastroProfessorComponent';
 import LoginComponent from './components/login/LoginComponent';
 import RedefenirSenhaComponent from './components/redefenirsenha/RedefenirSenhaComponent';
+import QuestionsComponent from './components/questions/QuestionsComponent';
 
 
 const RouterConfig = () => {
