@@ -10,7 +10,6 @@ import CadastroAlunoComponent from './components/cadastros/aluno/CadastroAlunoCo
 import CadastroProfessorComponent from './components/cadastros/professor/CadastroProfessorComponent';
 import LoginComponent from './components/login/LoginComponent';
 import RedefenirSenhaComponent from './components/redefenirsenha/RedefenirSenhaComponent';
-import QuestionsComponent from './components/questions/QuestionsComponent';
 import Intro from './components/intropage/IntroPageComponent';
 import LayoutComponent from './components/layout/LayoutComponent';
 
@@ -21,7 +20,7 @@ const RouterConfig = () => {
       <Route path="/" element={<Intro />} />
       <Route path="/sobre" element={<SobreComponent />} />
       <Route path="/simulados" element={<SimuladosComponent />} />
-      <Route path="/questoes" element={ <QuestionsComponent />} />
+      <Route path="/questoes" element={ <MinhasQuestoesComponent />} />
       <Route path="/minhasQuestoes" element={<MinhasQuestoesComponent />} />
       <Route path="/config" element={<LayoutComponent><ConfigComponent /></LayoutComponent>} />
       <Route path="/cadastros" element={<CadastrosComponent />} />

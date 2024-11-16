@@ -1,89 +1,67 @@
-import React, { useRef, useState } from "react";
-import "./MinhasQuestoes.css";
-import documentoImg from "../assets/documents.png";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import './MinhasQuestoes.css'; 
 import ResponsiveAppBar from "../header/Header";
 
-const MinhasQuestoesComponent = () => {
-  const [mensagemSucesso, setMensagemSucesso] = useState(false);
-  const fileInputRef = useRef(null);
-  const questoes = Array(8).fill({
-    nome: "Carlos Alberto",
-    foto: "",
-  });
+const QuestionsComponent = () => {
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      handleUpload(file);
-    }
-  };
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/questao/questoes");
+        const data = await response.json();
+        setQuestions(data);
+        setLoading(false);
+      } catch (error) {
+        setError("Erro ao carregar questões");
+        setLoading(false);
+      }
+    };
 
-  const handleUpload = (file) => {
-    setMensagemSucesso(true);
-    setTimeout(() => setMensagemSucesso(false), 5000);
+    fetchQuestions();
+  }, []);
 
-    const formData = new FormData();
-    formData.append("file", file);
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p className="loading-message">Carregando as melhores questões para você...</p>
+      </div>
+    );
+  }
 
-    const apiUrl = "https://bancodequestoes.onrender.com/serviceIA/processar-pdf";
-
-    axios
-      .post(apiUrl, formData)
-      .then((response) => {
-        console.log("Sucesso:", response.data);
-      })
-      .catch((error) => {
-        console.error("Erro:", error.response || error.message || error);
-      });
-  };
-
-  const triggerFileInput = () => {
-    fileInputRef.current.click();
-  };
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <div>
-      <ResponsiveAppBar/>
-      <div className="container">
-        {mensagemSucesso && (
-          <div className="alert-mensagem">
-            Arquivo enviado com sucesso!
-          </div>
-        )}
-        <div className="scanner">
-          <img src={documentoImg} alt="Scanner Icon" className="scanner-icon" />
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={handleFileChange}
-            ref={fileInputRef}
-            style={{ display: "none" }}
-          />
-        </div>
-        <div className="button">
-          <button style={{position:'relative', top:'-15px'}} className="scanner-button" onClick={triggerFileInput}>
-            Scannerar Documento
-          </button>
-        </div>
-        <div className="questoes-container">
-          {questoes.map((questao, index) => (
-            <div key={index} className="questao-card">
-              <div className="mini-card">
-                <p className="lista-de">Lista de</p>
-                <div className="perfil">
-                  <img src={questao.foto} alt="Foto de perfil" className="foto" />
-                  <p className="nome">{questao.nome}</p>
-                </div>
-                <button className="acessar-button">Acessar</button>
-              </div>
-            </div>
-          ))}
-        </div>
+      <ResponsiveAppBar />
+      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <h1>Praticar questões</h1>
+        <p>Pesquise, favorite e faça as questões da sua escolha</p>
       </div>
-   
+      <div className="questions-container">
+        {questions.map((question) => (
+          <div className="question-card" key={question.id}>
+            <div className="header">{question.cabecalho}</div>
+            <div className="body">
+              <p className="enunciado">{question.enunciado}</p>
+              <ul className="alternativas">
+                {question.alternativas.map((alternativa, index) => (
+                  <li key={index} className="alternativa">
+                    {alternativa}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default MinhasQuestoesComponent;
+export default QuestionsComponent;
