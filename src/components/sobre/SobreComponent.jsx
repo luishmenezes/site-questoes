@@ -47,7 +47,7 @@
                 </b>{" "}
                 Relação de confiança com os alunos. <br />
                 </p>
-                <a href="#" className="read-more">
+                <a href="/home" className="read-more">
                 Ler mais
                 </a>
             </Card>
@@ -61,7 +61,7 @@
                 capacitar os alunos <br />a atingirem seus objetivos acadêmicos e
                 profissionais.
                 </p>
-                <a href="#" className="read-more">
+                <a href="/home" className="read-more">
                 Ler mais
                 </a>
             </Card>
@@ -74,7 +74,7 @@
                 combinando tecnologia, metodologia de ensino eficiente e o suporte
                 de professores especializados e qualificados. <br />
                 </p>
-                <a href="#" className="read-more">
+                <a href="/home" className="read-more">
                 Ler mais
                 </a>
             </Card>

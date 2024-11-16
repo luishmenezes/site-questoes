@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import "./MinhasQuestoes.css";
 import documentoImg from "../assets/documents.png";
 import axios from "axios";
-import LayoutComponent from "../layout/LayoutComponent"; 
 import ResponsiveAppBar from "../header/Header";
 
 const MinhasQuestoesComponent = () => {
