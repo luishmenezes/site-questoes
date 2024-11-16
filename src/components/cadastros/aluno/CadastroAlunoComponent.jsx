@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Card, Space, Button, Checkbox, Form, Input } from "antd";
+import { Card, Form, Input, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./CadastroAluno.module.css"; 
 
 const Cadastro = () => {
+  
   const navigate = useNavigate();
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -21,7 +23,7 @@ const Cadastro = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/usuarios/cadastro",
+        "https://bancodequestoes.onrender.com/usuarios/cadastro",
         data,
         {
           headers: {
@@ -50,170 +52,135 @@ const Cadastro = () => {
   };
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#011C40",
-        padding: 0,
-        margin: 0,
-        height: "100%",
-        overflow: "hidden",
-      }}
-    >
-      <Space direction="vertical" size={16}>
+    <div className="container">
+      <div className="form-container">
         <Card
-          style={{
-            top: "-4 px",
-            width: "600px",
-            height: "640px",
-            borderRadius: "15px",
-            boxShadow: "0 2px 5px rgba(0, 0, 0, 0.3)",
-            background: "linear-gradient(145deg, #0349A6, #011C40)",
-            border: "2px solid white",
-            padding: "10px",
-            margin: 0,
-          }}
+          style={{ width: "120%", maxWidth: "800px", margin: "0 auto" }}
+          className="card-cadastro"
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "20px",
-            }}
-          >
-            <div style={{ flex: 1 }}>
-              <h2
-                style={{
-                  color: "white",
-                  textAlign: "center",
-                  marginBottom: "10px",
-                  position: "relative",
-                  right: "-110px",
-                  top: "-25px",
-                }}
+          <h2 style={{ color: "white" }} className="cadastro-titulo">
+            Cadastre-se
+          </h2>
+          <div className="form-content">
+            <Form
+              name="basic"
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              layout="vertical"
+              style={{ marginTop: "20px", flex: 1, paddingRight: "290px" }}
+            >
+              <Form.Item
+                label="Nome"
+                name="nome"
+                rules={[
+                  { required: true, message: "Por favor, insira seu nome!" },
+                ]}
               >
-                Cadastre-se
-              </h2>
+                <Input value={nome} onChange={(e) => setNome(e.target.value)} />
+              </Form.Item>
 
-              <Form
-                name="basic"
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
-                layout="vertical"
+              <Form.Item
+                label="E-mail"
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    type: "email",
+                    message: "Por favor, insira um e-mail válido!",
+                  },
+                ]}
               >
-                <Form.Item
-                  label="Usuário"
-                  name="username"
-                  rules={[
-                    { required: true, message: "Por favor, preencha o campo!" },
-                  ]}
+                <Input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                label="Instituição"
+                name="instituicao"
+                rules={[
+                  {
+                    required: true,
+                    message: "Por favor, insira sua instituição!",
+                  },
+                ]}
+              >
+                <Input
+                  value={instituicao}
+                  onChange={(e) => setInstituicao(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                label="Senha"
+                name="senha"
+                rules={[
+                  { required: true, message: "Por favor, insira sua senha!" },
+                ]}
+              >
+                <Input.Password
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                label="Confirmar Senha"
+                name="confirmarSenha"
+                rules={[
+                  { required: true, message: "Por favor, confirme sua senha!" },
+                ]}
+              >
+                <Input.Password
+                  value={confirmarSenha}
+                  onChange={(e) => setConfirmarSenha(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item>
+                <Button
+                  onClick={handleEnviar}
+                  type="primary"
+                  htmlType="submit"
+                  className="button-enviar"
+                  style={{
+                    position: "relative",
+                    right: "-308px",
+                    top: "-120px",
+                  }}
                 >
-                  <Input
-                    value={nome}
-                    onChange={(e) => setNome(e.target.value)}
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  label="Instituição"
-                  name="institution"
-                  rules={[
-                    { required: true, message: "Por favor, preencha o campo!" },
-                  ]}
-                >
-                  <Input
-                    value={instituicao}
-                    onChange={(e) => setInstituicao(e.target.value)}
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  label="Email"
-                  name="email"
-                  rules={[
-                    { required: true, message: "Por favor, preencha o campo!" },
-                  ]}
-                >
-                  <Input
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  label="Senha"
-                  name="password"
-                  rules={[
-                    { required: true, message: "Por favor, preencha o campo!" },
-                  ]}
-                >
-                  <Input.Password
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  label="Confirmar senha"
-                  name="confirm-password"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Por favor, confirme sua senha!",
-                    },
-                  ]}
-                >
-                  <Input.Password
-                    value={confirmarSenha}
-                    onChange={(e) => setConfirmarSenha(e.target.value)}
-                  />
-                </Form.Item>
-
-                <Form.Item>
-                  <Checkbox>Aceito as políticas de privacidade</Checkbox>
-                </Form.Item>
-
-                <Form.Item>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    style={{
-                      width: "100%",
-                      position: "relative",
-                      right: "-320px",
-                      top: "-175px",
-                      width: "150px",
-                    }}
-                  >
-                    Confirmar
-                  </Button>
-                </Form.Item>
-              </Form>
-            </div>
-
-            <div style={{ flex: 1, textAlign: "center" }}>
-              <img
-                src="/cadAluno.jpg"
-                alt="Cadastro"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  borderRadius: "15px",
-                  position: "relative",
-                  right: "-29px",
-                  borderRadius: "75px",
-                  top: "-75px",
-                }}
-              />
-            </div>
+                  Confirmar
+                </Button>
+              </Form.Item>
+            </Form>
           </div>
         </Card>
-      </Space>
+        <div
+          className="image-container"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginLeft: "20px",
+          }}
+        >
+          <img
+            src="cadAluno.jpg"
+            alt="Cadastro"
+            className="cadastro-image"
+            style={{
+              width: "225px",
+              height: "225px",
+              objectFit: "cover",
+              borderRadius: "48px",
+              position: "relative",
+              top: "-450px",
+              left: "212px",
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 };

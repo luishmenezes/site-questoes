@@ -1,16 +1,15 @@
 .container {
   background: linear-gradient(to right, #4D688C, #011C40);
   min-height: 100vh;
-  width: calc(100% - 256px);
-  position: absolute;
-  top: 0;
-  left: 255px;
+  width: 100%; /* Modificado para ocupar toda a largura */
+  position: relative; /* Ajustado para evitar sobreposições */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 50px;
   box-sizing: border-box;
 }
+
 
 .title {
   text-align: center;

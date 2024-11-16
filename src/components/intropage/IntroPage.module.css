@@ -1,0 +1,22 @@
+
+.Intropage {
+  background: linear-gradient(135deg, #4D688C, #011C40); 
+  height: 100vh; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+.Student {
+  max-width: 100%; 
+  width: 1000px; 
+  height: auto;
+  display: block; 
+  margin: 0 auto; 
+}
+
+@media (max-width: 600px) {
+    .Student {
+      width: 60%;
+      max-width: 200px;
+    }
+  }
