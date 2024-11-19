@@ -35,7 +35,7 @@ export default function MenuComponent() {
         {
             key: 'minhasQuestoes',
             icon: <BookFilled />,
-            label: <Link to="/minhasQuestoes">Minhas questões</Link>,
+            label: <Link to="/minhasQuestoes">Minhas Listas</Link>,
         },
         {
             key: 'simulados',
@@ -56,6 +56,11 @@ export default function MenuComponent() {
             key: 'config',
             icon: <SettingOutlined />,
             label: <Link to="/config">Configurações</Link>,
+        },
+        {
+            key: 'formulario',
+            icon: <SettingOutlined />,
+            label: <Link to="/formulario">Formulario</Link>,
         },
     ];
 
