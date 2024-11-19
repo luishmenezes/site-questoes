@@ -1,0 +1,33 @@
+.cadastro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+  }
+
+  .cadastro-space {
+    text-align: center;
+  }
+
+  .cadastro-card {
+    width: 400px;
+    text-align: center;
+    border: 2px solid #000;
+    padding: 20px;
+    background-color: #fff;
+  }
+
+  .cadastro-form {
+    max-width: 600px;
+  }
+
+  .cadastro-checkbox {
+    position: relative;
+    right: -60px;
+  }
+
+  .cadastro-button {
+    text-align: center;
+  }
+  
