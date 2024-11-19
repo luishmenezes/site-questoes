@@ -5,7 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 import './CadastroProfessorComponent.css';
-import ResponsiveAppBar from "../../header/Header"; 
+import ResponsiveAppBar from "../../header/Header";
 
 const CadastroProfessorComponent = () => {
   const [loading, setLoading] = useState(false);
@@ -22,16 +22,24 @@ const CadastroProfessorComponent = () => {
 
     const payload = {
       ...values,
-      dataNascimento: formattedDataNascimento, 
-      role: 'PROFESSOR', 
+      dataNascimento: formattedDataNascimento,
+      role: 'PROFESSOR',
     };
 
     try {
       const response = await axios.post('http://localhost:8080/professor/registrar', payload);
 
       if (response.status === 200) {
+        // Salva os dados no localStorage
+        const { nome, email } = values;
+        const { token } = response.data; // Ajuste conforme a resposta do back-end
+
+        localStorage.setItem("nome", nome);
+        localStorage.setItem("email", email);
+        localStorage.setItem("token", token);
+
         message.success('Cadastro realizado com sucesso!');
-        navigate('/home'); 
+        navigate('/home');
       } else {
         setError('Erro no cadastro. Verifique os dados e tente novamente.');
       }
