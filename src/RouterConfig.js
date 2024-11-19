@@ -12,6 +12,8 @@ import LoginComponent from './components/login/LoginComponent';
 import RedefenirSenhaComponent from './components/redefenirsenha/RedefenirSenhaComponent';
 import Intro from './components/intropage/IntroPageComponent';
 import LayoutComponent from './components/layout/LayoutComponent';
+import Form from './components/formulario/FormularioList';
+
 
 const RouterConfig = () => {
   return (
@@ -28,6 +30,7 @@ const RouterConfig = () => {
       <Route path="/formprofessor" element={<LayoutComponent><CadastroProfessorComponent /></LayoutComponent>} />
       <Route path="/login" element={<LoginComponent />} />
       <Route path="/redefenir" element={<RedefenirSenhaComponent />} />
+      <Route path="/formulario" element={<Form/>} />
     </Routes>
   );
 };

@@ -1,0 +1,31 @@
+/* Estilos para o Card de autenticação */
+.auth-card {
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-color: #011C40;  /* Cor ao redor dos botões */
+    border-width: 1px;
+    border-style: solid;
+  }
+  
+  /* Estilos para os botões de Login */
+  .auth-btn {
+    margin-bottom: 8px;
+    border-color: #011C40;
+  }
+  
+  /* Estilos para os inputs */
+  .input-field .MuiInputBase-root {
+    background-color: #0455BF;  /* Cor de fundo dos inputs */
+    color: #FFFFFF;  /* Cor do texto dentro dos inputs */
+  }
+  
+  /* Selecione o foco dos campos de entrada */
+  .input-field .MuiInputBase-root:focus-within {
+    background-color: #0455BF;
+  }
+  
