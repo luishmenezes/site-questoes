@@ -23,7 +23,7 @@ const RouterConfig = () => {
       <Route path="/sobre" element={<SobreComponent />} />
       <Route path="/simulados" element={<SimuladosComponent />} />
       <Route path="/questoes" element={ <MinhasQuestoesComponent />} />
-      <Route path="/minhasQuestoes" element={<MinhasQuestoesComponent />} />
+      <Route path="/minhasQuestoes" element={<SimuladosComponent />} />
       <Route path="/config" element={<LayoutComponent><ConfigComponent /></LayoutComponent>} />
       <Route path="/cadastros" element={<CadastrosComponent />} />
       <Route path="/formaluno" element={<CadastroAlunoComponent />} />
