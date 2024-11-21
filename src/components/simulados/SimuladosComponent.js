@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import "./SimuladosComponent.css";
 import documentoImg from "../assets/documents.png";
 import axios from "axios";
-import ResponsiveAppBar from "../header/Header";
 
 const MinhasQuestoesComponent = () => {
   const [mensagemSucesso, setMensagemSucesso] = useState(false);
@@ -44,7 +43,6 @@ const MinhasQuestoesComponent = () => {
 
   return (
     <div>
-      <ResponsiveAppBar />
       <div className="containerr">
         {mensagemSucesso && (
           <div className="alert-mensagem">

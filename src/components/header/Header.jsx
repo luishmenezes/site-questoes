@@ -9,14 +9,10 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 
 const settings = ["Perfil", "Conta", "Dashboard", "Sair"];
 
 function ResponsiveAppBar() {
-  const navigate = useNavigate();
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [userName, setUserName] = useState("");
 
@@ -41,16 +37,13 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <FontAwesomeIcon
-            icon={faArrowLeft}
-            onClick={() => navigate("/home")}
-            style={{ cursor: "pointer", fontSize: "28px", marginRight: "10px" }}
-          />
-
           <Box sx={{ flexGrow: 1 }} />
-   
+
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography variant="h6" sx={{ color: "white", marginRight: "10px" }}>
+            <Typography
+              variant="h6"
+              sx={{ color: "white", marginRight: "10px" }}
+            >
               Olá, {userName}
             </Typography>
             <Tooltip title="Abrir configurações">
