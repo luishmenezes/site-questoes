@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import './MinhasQuestoes.css'; 
-import ResponsiveAppBar from "../header/Header";
 
 const QuestionsComponent = () => {
   const [questions, setQuestions] = useState([]);
@@ -25,7 +24,6 @@ const QuestionsComponent = () => {
 
   return (
     <div>
-      <ResponsiveAppBar />
       {loading ? (
         <div className="loading-container">
           <div className="spinner"></div>

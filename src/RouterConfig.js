@@ -20,14 +20,14 @@ const RouterConfig = () => {
     <Routes>
       <Route path="/home" element={<LayoutComponent><HomeComponent /></LayoutComponent>} />
       <Route path="/" element={<Intro />} />
-      <Route path="/sobre" element={<SobreComponent />} />
-      <Route path="/simulados" element={<SimuladosComponent />} />
-      <Route path="/questoes" element={ <MinhasQuestoesComponent />} />
-      <Route path="/minhasQuestoes" element={<SimuladosComponent />} />
+      <Route path="/sobre" element={<LayoutComponent><SobreComponent /></LayoutComponent>} />
+      <Route path="/simulados" element={<LayoutComponent><SimuladosComponent /></LayoutComponent>} />
+      <Route path="/questoes" element={ <LayoutComponent><MinhasQuestoesComponent /></LayoutComponent>} />
+      <Route path="/minhasQuestoes" element={<LayoutComponent><SimuladosComponent /></LayoutComponent>} />
       <Route path="/config" element={<LayoutComponent><ConfigComponent /></LayoutComponent>} />
       <Route path="/cadastros" element={<CadastrosComponent />} />
       <Route path="/formaluno" element={<CadastroAlunoComponent />} />
-      <Route path="/formprofessor" element={<LayoutComponent><CadastroProfessorComponent /></LayoutComponent>} />
+      <Route path="/formprofessor" element={<CadastroProfessorComponent />} />
       <Route path="/login" element={<LoginComponent />} />
       <Route path="/redefenir" element={<RedefenirSenhaComponent />} />
       <Route path="/formulario" element={<Form/>} />
