@@ -47,7 +47,7 @@ const LayoutComponent = ({ children }) => {
         >
           <Content
             style={{
-              padding: 24,
+              padding: 0,
               margin: 0,
               minHeight: 280,
               backgroundColor: "#f0f2f5",
