@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
-import { Card, Space, Button, Form, Input, DatePicker, message, Checkbox } from 'antd';
+import React, { useState } from "react";
+import {
+  Card,
+  Space,
+  Button,
+  Form,
+  Input,
+  DatePicker,
+  message,
+  Checkbox,
+} from "antd";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-import moment from 'moment';
+import axios from "axios";
+import moment from "moment";
 
-import './CadastroProfessorComponent.css';
-import ResponsiveAppBar from "../../header/Header";
+import "./CadastroProfessorComponent.css";
 
 const CadastroProfessorComponent = () => {
   const [loading, setLoading] = useState(false);
@@ -17,17 +25,20 @@ const CadastroProfessorComponent = () => {
     setError(null);
 
     const formattedDataNascimento = values.dataNascimento
-      ? moment(values.dataNascimento).format('YYYY-MM-DD')
-      : '';
+      ? moment(values.dataNascimento).format("YYYY-MM-DD")
+      : "";
 
     const payload = {
       ...values,
       dataNascimento: formattedDataNascimento,
-      role: 'PROFESSOR',
+      role: "PROFESSOR",
     };
 
     try {
-      const response = await axios.post('http://localhost:8080/professor/registrar', payload);
+      const response = await axios.post(
+        "http://localhost:8080/professor/registrar",
+        payload
+      );
 
       if (response.status === 200) {
         // Salva os dados no localStorage
@@ -38,13 +49,13 @@ const CadastroProfessorComponent = () => {
         localStorage.setItem("email", email);
         localStorage.setItem("token", token);
 
-        message.success('Cadastro realizado com sucesso!');
-        navigate('/home');
+        message.success("Cadastro realizado com sucesso!");
+        navigate("/home");
       } else {
-        setError('Erro no cadastro. Verifique os dados e tente novamente.');
+        setError("Erro no cadastro. Verifique os dados e tente novamente.");
       }
     } catch (error) {
-      setError('Erro ao realizar a requisição. Tente novamente mais tarde.');
+      setError("Erro ao realizar a requisição. Tente novamente mais tarde.");
       console.error(error);
     } finally {
       setLoading(false);
@@ -52,16 +63,17 @@ const CadastroProfessorComponent = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
   return (
     <div>
-      <ResponsiveAppBar />
       <div className="cadastro-container">
         {error && <div className="error-message">{error}</div>}
         <Space className="cadastro-space" direction="vertical" size={16}>
-          <Card className="cadastro-card">
+          <Card style={{
+            top: '-35px'
+          }} className="cadastro-card">
             <Form
               name="cadastroProfessor"
               className="cadastro-form"
@@ -72,84 +84,133 @@ const CadastroProfessorComponent = () => {
               <Form.Item
                 label="Nome"
                 name="nome"
-                rules={[{ required: true, message: 'Por favor, preencha o nome!' }]}
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+                rules={[
+                  { required: true, message: "" },
+                ]}
               >
-                <Input />
+                <Input className="cadastro-input" />
               </Form.Item>
 
               <Form.Item
                 label="Matéria 1"
                 name="materia1"
-                rules={[{ required: true, message: 'Por favor, preencha a matéria 1!' }]}
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+                rules={[
+                  {
+                    required: true,
+                    message: "",
+                  },
+                ]}
               >
-                <Input />
+                <Input className="cadastro-input" />
               </Form.Item>
 
               <Form.Item
                 label="Matéria 2"
                 name="materia2"
-                rules={[{ required: true, message: 'Por favor, preencha a matéria 2!' }]}
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+                rules={[
+                  {
+                    required: true,
+                    message: "",
+                  },
+                ]}
               >
-                <Input />
+                <Input className="cadastro-input" />
               </Form.Item>
 
               <Form.Item
                 label="Instituição"
                 name="instituicao"
-                rules={[{ required: true, message: 'Por favor, preencha a instituição!' }]}
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+                rules={[
+                  {
+                    required: true,
+                    message: "",
+                  },
+                ]}
               >
-                <Input />
+                <Input className="cadastro-input" />
               </Form.Item>
 
               <Form.Item
                 label="Email"
                 name="email"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
                 rules={[
-                  { required: true, type: 'email', message: 'Por favor, insira um email válido!' },
+                  {
+                    required: true,
+                    type: "email",
+                    message: "",
+                  },
                 ]}
               >
-                <Input />
+                <Input className="cadastro-input" />
               </Form.Item>
 
               <Form.Item
                 label="Senha"
                 name="senha"
-                rules={[{ required: true, message: 'Por favor, preencha a senha!' }]}
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+                rules={[
+                  { required: true, message: "" },
+                ]}
               >
-                <Input.Password />
+                <Input.Password className="cadastro-input" />
               </Form.Item>
 
               <Form.Item
                 label="Data de Nascimento"
                 name="dataNascimento"
-                rules={[{ required: true, message: 'Por favor, selecione uma data!' }]}
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+                rules={[
+                  { required: true, message: "" },
+                ]}
               >
-                <DatePicker />
+                <DatePicker
+                  className="cadastro-input"
+                  style={{ width: "100%" }}
+                />
               </Form.Item>
 
-              <Form.Item
-                name="remember"
-                valuePropName="checked"
-                wrapperCol={{
-                  offset: 0,
-                  span: 16,
-                }}
-              >
-                <Checkbox>Aceito as políticas de privacidade</Checkbox>
-              </Form.Item>
-
-              <Form.Item
-                wrapperCol={{
-                  offset: 0,
-                  span: 24,
-                }}
-              >
-                <Button type="primary" htmlType="submit" loading={loading}>
+              <Form.Item wrapperCol={{ span: 24 }}>
+                <Button style={{position: 'relative', top: '5px'}} className="buttonC" type="primary" htmlType="submit" loading={loading}>
                   Cadastre-se
                 </Button>
               </Form.Item>
             </Form>
           </Card>
+          <div
+          className="image-container"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginLeft: "20px",
+          }}
+        >
+          <img
+            src="image 6.png"
+            alt="Cadastro"
+            className="cadastro-image"
+            style={{
+              width: "225px",
+              height: "225px",
+              objectFit: "cover",
+              position: "relative",
+              top: "-480px",
+              left: "162px",
+            }}
+          />
+        </div>
         </Space>
       </div>
     </div>

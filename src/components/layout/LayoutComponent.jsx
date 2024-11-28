@@ -12,14 +12,17 @@ const LayoutComponent = ({ children }) => {
     setCollapsed((prev) => !prev);
   };
 
+  const siderWidth = window.innerWidth <= 768 ? 149.5 : 256;
+
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: "100vh", overflowY: "auto" }}> 
       <div style={{ position: "fixed", width: "100%", zIndex: 1000 }}>
         <ResponsiveAppBar />
       </div>
-      <Layout style={{ minHeight: "100vh" }}>
+
+      <Layout style={{ height: "100%" }}>
         <Sider
-          width={256}
+          width={siderWidth}
           collapsedWidth={80}
           collapsible
           collapsed={collapsed}
@@ -27,11 +30,12 @@ const LayoutComponent = ({ children }) => {
           style={{
             backgroundColor: "#001529",
             position: "fixed",
-            top: 64,
+            top: 55, 
             left: 0,
             bottom: 0,
             zIndex: 100,
             transition: "all 0.3s ease",
+            overflowY: "auto", 
           }}
         >
           <MenuComponent toggleMenu={toggleCollapsed} />
@@ -39,18 +43,19 @@ const LayoutComponent = ({ children }) => {
 
         <Layout
           style={{
-            marginLeft: collapsed ? 80 : 256,
-            overflowY: "auto",
-            paddingTop: 64,
-            transition: "all 0.3s ease",
+            marginLeft: collapsed ? 80 : siderWidth, 
+            paddingTop: 55, 
+            height: "100%",
+            overflowY: "auto", 
           }}
         >
           <Content
             style={{
               padding: 0,
               margin: 0,
-              minHeight: 280,
               backgroundColor: "#f0f2f5",
+              height: "calc(100vh - 64px)",  
+              overflowY: "auto",  
             }}
           >
             {children}

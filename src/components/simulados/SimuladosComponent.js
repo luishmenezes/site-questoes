@@ -45,9 +45,7 @@ const MinhasQuestoesComponent = () => {
     <div>
       <div className="containerr">
         {mensagemSucesso && (
-          <div className="alert-mensagem">
-            Arquivo enviado com sucesso!
-          </div>
+          <div className="alert-mensagem">Arquivo enviado com sucesso!</div>
         )}
         <div className="scanner">
           <img src={documentoImg} alt="Scanner Icon" className="scanner-icon" />
