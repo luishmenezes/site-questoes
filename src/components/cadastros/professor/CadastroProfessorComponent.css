@@ -1,33 +1,125 @@
 .cadastro-container {
-    display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(to right, #011c40, #0349a6);
+}
+
+.cadastro-card {
+  width: 100%;
+  max-width: 1500px;
+  min-width: 700px;
+  height: auto;
+  max-height: 96vh;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background: transparent;
+  border: 2px solid white;
+  position: relative;
+}
+
+.cadastro-form .ant-form-item {
+  margin-bottom: 8px;
+  width: 300px;
+}
+
+.cadastro-content {
+  display: flex;
+  width: 100%;
+}
+
+.cadastro-form-container {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.cadastro-button {
+  margin-top: 20px;
+}
+
+.cadastro-form .ant-form-item {
+  margin-bottom: 2px;
+}
+
+.buttonC {
+  position: relative;
+  margin-top: 14px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 390px) and (max-width: 634px) {
+  .cadastro-card {
+    position: relative;
+    margin-top: -15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cadastro-container {
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f5f5f5;
-  }
-
-  .cadastro-space {
-    text-align: center;
+    padding: 20px;
   }
 
   .cadastro-card {
-    width: 400px;
-    text-align: center;
-    border: 2px solid #000;
-    padding: 20px;
-    background-color: #fff;
+    min-width: 90%;
+    max-width: 100%;
+    height: auto;
+    padding: 15px;
   }
 
-  .cadastro-form {
-    max-width: 600px;
+  .cadastro-form .ant-form-item {
+    width: 100%;
   }
 
-  .cadastro-checkbox {
-    position: relative;
-    right: -60px;
+  .cadastro-image {
+    display: none;
   }
 
-  .cadastro-button {
-    text-align: center;
+  .buttonC {
+    position: static;
+    margin-top: 20px;
   }
-  
+}
+
+@media (max-width: 360px) and (max-height: 800px) {
+  .cadastro-card {
+    margin-top: 30px;
+  }
+
+  .buttonC {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 820px) and (max-height: 1180px) {
+  .buttonC {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 390px) and (max-height: 844px) {
+  .cadastro-card {
+    margin-top: 50px;
+  }
+
+  .buttonC {
+    margin-top: -10px;
+  }
+}
+
+@media (min-width: 390px) {
+  .buttonC {
+    margin-top: -15px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 390px) {
+  .cadastro-card {
+    margin-top: 45px;
+  }
+}
