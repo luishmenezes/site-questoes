@@ -13,7 +13,9 @@ import RedefenirSenhaComponent from './components/redefenirsenha/RedefenirSenhaC
 import Intro from './components/intropage/IntroPageComponent';
 import LayoutComponent from './components/layout/LayoutComponent';
 import Form from './components/formulario/FormularioList';
-
+import ConfigAlunoComponent from './components/configuracao/ConfigAlunoComponent';
+import ConfigEscolaComponent from './components/configuracao/ConfigEscolaComponent';
+import ConfigProfessorComponent from './components/configuracao/ConfigProfessorComponent';
 
 const RouterConfig = () => {
   return (
@@ -31,6 +33,9 @@ const RouterConfig = () => {
       <Route path="/login" element={<LoginComponent />} />
       <Route path="/redefenir" element={<RedefenirSenhaComponent />} />
       <Route path="/formulario" element={<Form/>} />
+      <Route path="/configAluno" element={<ConfigAlunoComponent/>} />
+      <Route path="/configEscola" element={<ConfigEscolaComponent/>} />
+      <Route path="/configProfessor" element={<ConfigProfessorComponent/>} />
     </Routes>
   );
 };
