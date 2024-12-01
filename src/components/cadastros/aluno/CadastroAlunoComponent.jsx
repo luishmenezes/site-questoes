@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Form, Input, Button } from "antd";
+import { Card, Form, Input, Button, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./CadastroAluno.module.css"; 
@@ -11,13 +11,14 @@ const Cadastro = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [instituicao, setInstituicao] = useState("");
-  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [nascimento, setNascimento] = useState("")
 
   const handleEnviar = async () => {
     const data = {
       nome: nome.toString(),
       email: email.toString(),
       senha: senha.toString(),
+      nascimento: nascimento.toString(),
       instituicao: instituicao.toString(),
     };
 
@@ -97,22 +98,6 @@ const Cadastro = () => {
               </Form.Item>
 
               <Form.Item
-                label="Instituição"
-                name="instituicao"
-                rules={[
-                  {
-                    required: true,
-                    message: "Por favor, insira sua instituição!",
-                  },
-                ]}
-              >
-                <Input
-                  value={instituicao}
-                  onChange={(e) => setInstituicao(e.target.value)}
-                />
-              </Form.Item>
-
-              <Form.Item
                 label="Senha"
                 name="senha"
                 rules={[
@@ -126,15 +111,35 @@ const Cadastro = () => {
               </Form.Item>
 
               <Form.Item
-                label="Confirmar Senha"
-                name="confirmarSenha"
+                label="Nascimento"
+                name="Nascimento"
                 rules={[
-                  { required: true, message: "Por favor, confirme sua senha!" },
+                  {
+                    required: true,
+                    message: "Por favor, insira sua data de nascimento!",
+                  },
                 ]}
               >
-                <Input.Password
-                  value={confirmarSenha}
-                  onChange={(e) => setConfirmarSenha(e.target.value)}
+                <Input
+                type="date"
+                  value={nascimento}
+                  onChange={(e) => setNascimento(e.target.value)}
+                />
+              </Form.Item>
+              
+              <Form.Item
+                label="Instituição"
+                name="instituicao"
+                rules={[
+                  {
+                    required: true,
+                    message: "Por favor, insira sua instituição!",
+                  },
+                ]}
+              >
+                <Input
+                  value={instituicao}
+                  onChange={(e) => setInstituicao(e.target.value)}
                 />
               </Form.Item>
 

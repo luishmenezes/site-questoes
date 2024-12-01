@@ -2,12 +2,10 @@ import React, { useRef, useState, useEffect } from "react";
 import "./SimuladosComponent.css";
 import documentoImg from "../assets/documents.png";
 import axios from "axios";
-import ResponsiveAppBar from "../header/Header";
 import { useNavigate } from "react-router-dom";
 
 const MinhasQuestoesComponent = () => {
   const [mensagemSucesso, setMensagemSucesso] = useState(false);
-  const [questoes, setQuestoes] = useState([]);
   const [listas, setListas] = useState([]);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
@@ -44,8 +42,7 @@ const MinhasQuestoesComponent = () => {
     axios
       .post(apiUrl, formData)
       .then((response) => {
-        const novasQuestoes = response.data.questoes || [];
-        setQuestoes(novasQuestoes);
+        // Removendo a lógica que usa "questoes" se não for necessária
       })
       .catch((error) => {
         console.error("Erro ao processar o PDF:", error.response || error.message || error);
@@ -58,7 +55,6 @@ const MinhasQuestoesComponent = () => {
 
   return (
     <div>
-      <ResponsiveAppBar />
       <div className="containerr">
         {mensagemSucesso && (
           <div className="alert-mensagem">Arquivo enviado com sucesso!</div>
