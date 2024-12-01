@@ -12,6 +12,8 @@ import LoginComponent from './components/login/LoginComponent';
 import RedefenirSenhaComponent from './components/redefenirsenha/RedefenirSenhaComponent';
 import Intro from './components/intropage/IntroPageComponent';
 import LayoutComponent from './components/layout/LayoutComponent';
+import Listas from './components/Listas/Listas';
+import QuestoesLista from './components/Questoes/QuestoesLista';
 
 const RouterConfig = () => {
   return (
@@ -20,15 +22,16 @@ const RouterConfig = () => {
       <Route path="/" element={<Intro />} />
       <Route path="/sobre" element={<SobreComponent />} />
       <Route path="/simulados" element={<SimuladosComponent />} />
-      <Route path="/questoes" element={ <MinhasQuestoesComponent />} />
-      <Route path="/minhasQuestoes" element={<SimuladosComponent />} />
       <Route path="/config" element={<LayoutComponent><ConfigComponent /></LayoutComponent>} />
       <Route path="/cadastros" element={<CadastrosComponent />} />
       <Route path="/formaluno" element={<CadastroAlunoComponent />} />
       <Route path="/formprofessor" element={<LayoutComponent><CadastroProfessorComponent /></LayoutComponent>} />
+      <Route path="/minhasQuestoes" element={<SimuladosComponent />} />
+      <Route path="/questoes" element={<MinhasQuestoesComponent />} />
       <Route path="/login" element={<LoginComponent />} />
       <Route path="/redefenir" element={<RedefenirSenhaComponent />} />
-    </Routes>
+      <Route path="/listas" element={<Listas />} />
+      <Route path="/questoes/:id" element={<QuestoesLista />} />      </Routes>
   );
 };
 
