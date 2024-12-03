@@ -11,20 +11,20 @@ const Cadastro = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [instituicao, setInstituicao] = useState("");
-  const [nascimento, setNascimento] = useState("")
+  const [dataNascimento, setNascimento] = useState("")
 
   const handleEnviar = async () => {
     const data = {
       nome: nome.toString(),
       email: email.toString(),
       senha: senha.toString(),
-      nascimento: nascimento.toString(),
+      dataNascimento: dataNascimento.toString(),
       instituicao: instituicao.toString(),
     };
 
     try {
       const response = await axios.post(
-        "https://bancodequestoes.onrender.com/usuarios/cadastro",
+        "http://localhost:8080/estudantes/cadastro",
         data,
         {
           headers: {
@@ -111,8 +111,8 @@ const Cadastro = () => {
               </Form.Item>
 
               <Form.Item
-                label="Nascimento"
-                name="Nascimento"
+                label="data de nascimento"
+                name="dataNascimento"
                 rules={[
                   {
                     required: true,
@@ -122,7 +122,7 @@ const Cadastro = () => {
               >
                 <Input
                 type="date"
-                  value={nascimento}
+                  value={dataNascimento}
                   onChange={(e) => setNascimento(e.target.value)}
                 />
               </Form.Item>
