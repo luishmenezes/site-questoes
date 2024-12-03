@@ -1,126 +1,269 @@
 .scanner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .scanner-icon {
-    width: 100px;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .scanner-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .containerr {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-image: linear-gradient(#012350, #0349a6, #011c40);
-    min-height: 100vh;
-    padding: 20px;
-    gap: 20px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.scanner-icon {
+  width: 100px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.scanner-button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.scanner-button:hover {
+  background-color: #0056b3;
+}
+
+.containerr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(#012350, #0349a6, #011c40);
+  min-height: 100vh;
+  padding: 40px 20px;
+  gap: 30px;
+  color: #ffffff;
+}
+
+.questoes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  width: 100%;
+  padding: 0 10px;
+}
+
+@media (max-width: 768px) {
   .questoes-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    width: 100%;
-  }
-  
-  @media (max-width: 768px) {
-    .questoes-container {
       grid-template-columns: 1fr;
-    }
   }
-  
-  .questao-card {
-    background-color: #0062cc;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .lista-de {
-    font-size: 14px;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 10px;
-  }
-  
-  .perfil {
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  
-  .foto {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-  }
-  
-  .nome {
-    font-size: 14px;
-    font-weight: bold;
-    color: black;
-  }
-  
-  .acessar-button {
-    background-color: #00ff00;
-    color: black;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  
-  .alert-mensagem {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #28a745;
-    color: white;
-    padding: 15px 25px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    animation: fadeInOut 3s forwards;
-  }
-  
-  @keyframes fadeInOut {
-    0% {
+}
+
+.questao-card {
+  background-color: #0062cc;
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.questao-card:hover {
+  transform: translateY(-5px);
+}
+
+.lista-de {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.perfil {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.foto {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.nome {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.acessar-button {
+  background-color: #28a745;
+  color: black;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 12px;
+  transition: background-color 0.3s;
+}
+
+.acessar-button:hover {
+  background-color: #218838;
+}
+
+.alert-mensagem {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #28a745;
+  color: white;
+  padding: 18px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
       opacity: 0;
       transform: translateY(-10px);
-    }
-    10%,
-    90% {
+  }
+  10%, 90% {
       opacity: 1;
       transform: translateY(0);
-    }
-    100% {
+  }
+  100% {
       opacity: 0;
       transform: translateY(-10px);
-    }
   }
-  
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.modal-input, .modal-textarea {
+  width: 100%;
+  margin: 12px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.modal-button.salvar {
+  background: #4CAF50;
+  color: white;
+}
+
+.modal-button.salvar:hover {
+  background: #45a049;
+}
+
+.modal-button.cancelar {
+  background: #f44336;
+  color: white;
+}
+
+.modal-button.cancelar:hover {
+  background: #e53935;
+}
+
+.adicionar-lista-button {
+  background-color: #28a745; 
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 20px;
+}
+
+.adicionar-lista-button:hover {
+  background-color: #218838;
+  transform: translateY(-3px); 
+}
+
+.adicionar-lista-button:active {
+  background-color: #1e7e34; 
+  transform: translateY(1px); 
+}
+
+.adicionar-lista-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5); 
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.modal-save {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-save:hover {
+  background-color: #45a049;
+}
+
+.modal-close {
+  background-color: #f44336;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background-color: #e53935;
+}
