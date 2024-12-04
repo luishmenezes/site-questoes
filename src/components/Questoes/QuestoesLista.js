@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; 
 import './QuestoesLista.css'; 
-import ResponsiveAppBar from "../header/Header";
 
 const QuestoesLista = () => {
   const { id } = useParams();
@@ -12,7 +11,7 @@ const QuestoesLista = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/listas/${id}/questoes`);
+        const response = await fetch(`https://deploybbdq-production.up.railway.app/listas/${id}/questoes`);
         const data = await response.json();
         setQuestions(data);
         setLoading(false);
@@ -27,7 +26,6 @@ const QuestoesLista = () => {
 
   return (
     <div>
-      <ResponsiveAppBar />
       {loading ? (
         <div className="loading-container">
           <div className="spinner"></div>

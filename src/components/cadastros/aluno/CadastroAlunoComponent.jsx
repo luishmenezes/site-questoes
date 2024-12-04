@@ -24,7 +24,7 @@ const Cadastro = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/estudantes/cadastro",
+        "https://deploybbdq-production.up.railway.app/estudantes/cadastro",
         data,
         {
           headers: {

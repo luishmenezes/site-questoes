@@ -9,7 +9,7 @@ const QuestionsComponent = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch("http://localhost:8080/questao/questoes");
+        const response = await fetch("https://deploybbdq-production.up.railway.app/questao/questoes");
         const data = await response.json();
         setQuestions(data);
         setLoading(false);

@@ -28,17 +28,17 @@ const RouterConfig = () => {
       <Route path="/config" element={<LayoutComponent><ConfigComponent /></LayoutComponent>} />
       <Route path="/questoes" element={<LayoutComponent><MinhasQuestoesComponent /></LayoutComponent>} />
       <Route path="/minhasQuestoes" element={<LayoutComponent><SimuladosComponent /></LayoutComponent>} />
-      <Route path="/cadastros" element={<CadastrosComponent />} />
-      <Route path="/formaluno" element={<CadastroAlunoComponent />} />
+      <Route path="/cadastros" element={<LayoutComponent><CadastrosComponent /></LayoutComponent>} />
+      <Route path="/formaluno" element={<LayoutComponent><CadastroAlunoComponent /></LayoutComponent>} />
       <Route path="/formprofessor" element={<LayoutComponent><CadastroProfessorComponent /></LayoutComponent>} />
-      <Route path="/login" element={<LoginComponent />} />
+      <Route path="/login" element={<LayoutComponent><LoginComponent /></LayoutComponent>} />
       <Route path="/redefenir" element={<RedefenirSenhaComponent />} />
-      <Route path="/listas" element={<Listas />} />
-      <Route path="/questoes/:id" element={<QuestoesLista />} />
-      <Route path="/formulario" element={<Form />} />
-      <Route path="/configAluno" element={<ConfigAlunoComponent />} />
-      <Route path="/configEscola" element={<ConfigEscolaComponent />} />
-      <Route path="/configProfessor" element={<ConfigProfessorComponent />} />
+      <Route path="/listas" element={<LayoutComponent><Listas /></LayoutComponent>} />
+      <Route path="/questoes/:id" element={<LayoutComponent><QuestoesLista /></LayoutComponent>} />
+      <Route path="/formulario" element={<LayoutComponent><Form /></LayoutComponent>} />
+      <Route path="/configAluno" element={<LayoutComponent><ConfigAlunoComponent /></LayoutComponent>} />
+      <Route path="/configEscola" element={<LayoutComponent><ConfigEscolaComponent /></LayoutComponent>} />
+      <Route path="/configProfessor" element={<LayoutComponent><ConfigProfessorComponent /></LayoutComponent>} />
     </Routes>
   );
 };

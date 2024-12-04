@@ -17,7 +17,7 @@ const MinhasQuestoesComponent = () => {
   useEffect(() => {
     const fetchListas = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/listas/professor/1");
+        const response = await axios.get("https://deploybbdq-production.up.railway.app/listas/professor/1");
         setListas(response.data);
       } catch (error) {
         console.error("Erro ao buscar as listas:", error.response || error.message || error);
@@ -38,7 +38,7 @@ const MinhasQuestoesComponent = () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    const apiUrl = "http://localhost:8080/serviceIA/processar-pdf";
+    const apiUrl = "https://deploybbdq-production.up.railway.app/serviceIA/processar-pdf";
 
     axios
       .post(apiUrl, formData)
@@ -53,7 +53,7 @@ const MinhasQuestoesComponent = () => {
 
   const handleEnviarParaLista = async (listaId) => {
     try {
-      const apiUrl = `http://localhost:8080/listas/salvar-questoes-do-pdf/${listaId}`;
+      const apiUrl = `https://deploybbdq-production.up.railway.app/listas/salvar-questoes-do-pdf/${listaId}`;
       await axios.post(apiUrl, { listaId, questoes });
       setMensagemSucesso(true);
       setTimeout(() => setMensagemSucesso(false), 5000);
@@ -65,7 +65,7 @@ const MinhasQuestoesComponent = () => {
 
   const handleAddList = async () => {
     try {
-      const response = await axios.post(`http://localhost:8080/listas?titulo=${novoTitulo}&professorId=1`);
+      const response = await axios.post(`https://deploybbdq-production.up.railway.app/listas?titulo=${novoTitulo}&professorId=1`);
       setListas((prevListas) => [...prevListas, response.data]);
       setNovoTitulo("");
       setModalAddListOpen(false);
