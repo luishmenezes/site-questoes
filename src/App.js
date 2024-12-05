@@ -1,11 +1,19 @@
-import { BrowserRouter as Router } from 'react-router-dom';
-import RouterConfig from './RouterConfig';
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import RouterConfig from "./RouterConfig";
+import "antd/dist/reset.css";
 
 function App() {
   return (
-    <Router>
-      <RouterConfig />
-    </Router>
+    <div
+      style={{
+        minHeight: "100vh",
+      }}
+    >
+      <Router>
+        <RouterConfig />
+      </Router>
+    </div>
   );
 }
 
