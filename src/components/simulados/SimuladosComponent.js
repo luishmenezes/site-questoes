@@ -38,7 +38,7 @@ const MinhasQuestoesComponent = () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    const apiUrl = "https://deploybbdq-production.up.railway.app/serviceIA/processar-pdf";
+    const apiUrl = "https://bancodequestoes-production.up.railway.app/serviceIA/processar-pdf";
 
     axios
       .post(apiUrl, formData)
@@ -53,7 +53,7 @@ const MinhasQuestoesComponent = () => {
 
   const handleEnviarParaLista = async (listaId) => {
     try {
-      const apiUrl = `https://deploybbdq-production.up.railway.app/listas/salvar-questoes-do-pdf/${listaId}`;
+      const apiUrl = `https://bancodequestoes-production.up.railway.app/listas/salvar-questoes-do-pdf/${listaId}`;
       await axios.post(apiUrl, { listaId, questoes });
       setMensagemSucesso(true);
       setTimeout(() => setMensagemSucesso(false), 5000);
@@ -65,7 +65,7 @@ const MinhasQuestoesComponent = () => {
 
   const handleAddList = async () => {
     try {
-      const response = await axios.post(`https://deploybbdq-production.up.railway.app/listas?titulo=${novoTitulo}&professorId=1`);
+      const response = await axios.post(`https://bancodequestoes-production.up.railway.app/listas?titulo=${novoTitulo}&professorId=1`);
       setListas((prevListas) => [...prevListas, response.data]);
       setNovoTitulo("");
       setModalAddListOpen(false);
