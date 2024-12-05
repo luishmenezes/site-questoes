@@ -1,159 +1,133 @@
 import React, { useState } from "react";
-import { Card, Form, Input, Button, Checkbox } from "antd";
+import { Card, Form, Input, Button, message } from "antd";
 import { useNavigate } from "react-router-dom";
+import "./CadastroAluno.module.css";
 import axios from "axios";
-import "./CadastroAluno.module.css"; 
 
 const Cadastro = () => {
-  
   const navigate = useNavigate();
+
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
   const [instituicao, setInstituicao] = useState("");
-  const [nascimento, setNascimento] = useState("")
 
   const handleEnviar = async () => {
+    if (!nome || !email || !senha || !dataNascimento || !instituicao) {
+      message.error("Por favor, preencha todos os campos!");
+      return;
+    }
+
     const data = {
-      nome: nome.toString(),
-      email: email.toString(),
-      senha: senha.toString(),
-      nascimento: nascimento.toString(),
-      instituicao: instituicao.toString(),
+      nome,
+      email,
+      senha,
+      dataNascimento,
+      instituicao,
     };
 
     try {
       const response = await axios.post(
-        "https://bancodequestoes.onrender.com/usuarios/cadastro",
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        "https://deploybbdq-production.up.railway.app/estudantes/cadastro",
+        data
       );
-
-      if (response.status === 200) {
-        console.log("Cadastrado com sucesso");
-        navigate("/home");
-      } else {
-        console.error("Erro ao cadastrar");
-      }
+      localStorage.setItem("token", response)
+      console.log("Cadastro realizado com sucesso -> " , response.data);
+      message.success("Cadastro realizado com sucesso!!!");
+      navigate("/home");
     } catch (error) {
-      console.error("Erro na requisição", error);
+      if (error.response) {
+        console.error("Erro no back-end -> ", error.response.data);
+      } else if (error.request) {
+        console.error("erro servidor", error.request);
+        message.error("Erro na rede. tente novamente");
+      } else {
+        console.error("erro ao configurar a req:", error.message);
+      }
     }
-  };
-
-  const onFinish = () => {
-    handleEnviar();
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
     <div className="container">
       <div className="form-container">
         <Card
-          style={{ width: "120%", maxWidth: "800px", margin: "0 auto" }}
+          style={{ width: "100%", maxWidth: "800px", margin: "0 auto" }}
           className="card-cadastro"
         >
-          <h2 style={{ color: "white" }} className="cadastro-titulo">
+          <h2 style={{ color: "white", textAlign: "center" }} className="cadastro-titulo">
             Cadastre-se
           </h2>
           <div className="form-content">
             <Form
-              name="basic"
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
+              name="cadastro"
               layout="vertical"
-              style={{ marginTop: "20px", flex: 1, paddingRight: "290px" }}
+              style={{ marginTop: "20px", flex: 1 }}
             >
               <Form.Item
                 label="Nome"
-                name="nome"
-                rules={[
-                  { required: true, message: "Por favor, insira seu nome!" },
-                ]}
+                rules={[{ required: true, message: "Por favor, insira seu nome!" }]}
               >
-                <Input value={nome} onChange={(e) => setNome(e.target.value)} />
+                <Input
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
+                  placeholder="Seu nome completo"
+                />
               </Form.Item>
 
               <Form.Item
                 label="E-mail"
-                name="email"
                 rules={[
-                  {
-                    required: true,
-                    type: "email",
-                    message: "Por favor, insira um e-mail válido!",
-                  },
+                  { required: true, type: "email", message: "Por favor, insira um e-mail válido!" },
                 ]}
               >
                 <Input
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  placeholder="seuemail@exemplo.com"
                 />
               </Form.Item>
 
               <Form.Item
                 label="Senha"
-                name="senha"
-                rules={[
-                  { required: true, message: "Por favor, insira sua senha!" },
-                ]}
+                rules={[{ required: true, message: "Por favor, insira sua senha!" }]}
               >
                 <Input.Password
                   value={senha}
                   onChange={(e) => setSenha(e.target.value)}
+                  placeholder="Sua senha"
                 />
               </Form.Item>
 
               <Form.Item
                 label="Nascimento"
-                name="Nascimento"
-                rules={[
-                  {
-                    required: true,
-                    message: "Por favor, insira sua data de nascimento!",
-                  },
-                ]}
+                rules={[{ required: true, message: "Por favor, insira sua data de nascimento!" }]}
               >
                 <Input
-                type="date"
-                  value={nascimento}
-                  onChange={(e) => setNascimento(e.target.value)}
+                  type="date"
+                  value={dataNascimento}
+                  onChange={(e) => setDataNascimento(e.target.value)}
                 />
               </Form.Item>
-              
+
               <Form.Item
                 label="Instituição"
-                name="instituicao"
-                rules={[
-                  {
-                    required: true,
-                    message: "Por favor, insira sua instituição!",
-                  },
-                ]}
+                rules={[{ required: true, message: "Por favor, insira sua instituição!" }]}
               >
                 <Input
                   value={instituicao}
                   onChange={(e) => setInstituicao(e.target.value)}
+                  placeholder="Nome da instituição"
                 />
               </Form.Item>
 
               <Form.Item>
                 <Button
-                  onClick={handleEnviar}
                   type="primary"
-                  htmlType="submit"
+                  htmlType="button" 
                   className="button-enviar"
-                  style={{
-                    position: "relative",
-                    right: "-308px",
-                    top: "-120px",
-                  }}
+                  onClick={handleEnviar} 
+                  block 
                 >
                   Confirmar
                 </Button>
@@ -167,7 +141,7 @@ const Cadastro = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginLeft: "20px",
+            marginTop: "20px",
           }}
         >
           <img
@@ -179,9 +153,6 @@ const Cadastro = () => {
               height: "225px",
               objectFit: "cover",
               borderRadius: "48px",
-              position: "relative",
-              top: "-450px",
-              left: "212px",
             }}
           />
         </div>
