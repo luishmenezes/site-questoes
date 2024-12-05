@@ -20,20 +20,25 @@ const Cadastro = () => {
     }
 
     const data = {
-      nome,
-      email,
-      senha,
-      dataNascimento,
-      instituicao,
+      nome: nome.toString(),
+      email: email.toString(),
+      senha: senha.toString(),
+      dataNascimento: dataNascimento.toString(),
+      instituicao: instituicao.toString(),
     };
 
     try {
       const response = await axios.post(
-        "https://deploybbdq-production.up.railway.app/estudantes/cadastro",
-        data
+        "http://localhost:8080/estudantes/cadastro",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
-      localStorage.setItem("token", response)
-      console.log("Cadastro realizado com sucesso -> " , response.data);
+      localStorage.setItem("token", response);
+      console.log("Cadastro realizado com sucesso -> ", response.data);
       message.success("Cadastro realizado com sucesso!!!");
       navigate("/home");
     } catch (error) {
@@ -100,7 +105,7 @@ const Cadastro = () => {
               </Form.Item>
 
               <Form.Item
-                label="Nascimento"
+                label="Data de Nascimento"
                 rules={[{ required: true, message: "Por favor, insira sua data de nascimento!" }]}
               >
                 <Input
