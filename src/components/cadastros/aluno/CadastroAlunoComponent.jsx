@@ -111,7 +111,8 @@ const Cadastro = () => {
               </Form.Item>
 
               <Form.Item
-                label="Nascimento"
+
+                label="data de nascimento"
                 name="dataNascimento"
                 rules={[
                   {
