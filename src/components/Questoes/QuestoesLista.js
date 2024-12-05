@@ -11,7 +11,7 @@ const QuestoesLista = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`https://deploybbdq-production.up.railway.app/listas/${id}/questoes`);
+        const response = await fetch(`https://bancodequestoes-production.up.railway.app/listas/${id}/questoes`);
         const data = await response.json();
         setQuestions(data);
         setLoading(false);

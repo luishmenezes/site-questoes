@@ -17,7 +17,7 @@ const MinhasQuestoesComponent = () => {
   useEffect(() => {
     const fetchListas = async () => {
       try {
-        const response = await axios.get("https://deploybbdq-production.up.railway.app/listas/professor/1");
+        const response = await axios.get("https://bancodequestoes-production.up.railway.app/listas/professor/1");
         setListas(response.data);
       } catch (error) {
         console.error("Erro ao buscar as listas:", error.response || error.message || error);
