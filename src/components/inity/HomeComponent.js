@@ -7,7 +7,7 @@ const ProfileCard = ({ name, job, description, imgSrc }) => {
   const [isSelected, setIsSelected] = useState(false);
   
   const toggleDescription = (e) => {
-    e.stopPropagation();  // Impede o clique de selecionar o card ao clicar em "Read More"
+    e.stopPropagation();
     setIsExpanded(!isExpanded);
   };
   
@@ -37,32 +37,23 @@ const HomeComponent = () => {
   const [professores, setProfessores] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Simulando uma resposta mockada de 3 professores
   useEffect(() => {
-    const mockProfessores = [
-      {
-        nome: 'David Pontes',
-        materia1: 'Matemática',
-        descricao: 'Professor experiente em Matemática com mais de 10 anos de atuação.',
-        imagem: 'https://www.w3schools.com/w3images/avatar2.png',
-      },
-      {
-        nome: 'Luis Henrique',
-        materia1: 'Português',
-        descricao: 'Especialista em Língua Portuguesa e Literatura Brasileira.',
-        imagem: 'https://www.w3schools.com/w3images/avatar1.png',
-      },
-      {
-        nome: 'Maria Silva',
-        materia1: 'História',
-        descricao: 'Professora apaixonada por História e Ciências Sociais.',
-        imagem: 'https://www.w3schools.com/w3images/avatar5.png',
-      }
-    ];
 
-    // Usando mockProfessores ao invés de fazer a requisição para a API
-    setProfessores(mockProfessores);
-    setLoading(false);
+    axios.get('/api/professores') 
+      .then((response) => {
+        const professoresData = response.data.map(professor => ({
+          nome: professor.nome,
+          materia1: professor.materia1,
+          descricao: professor.materia1 + ' professor de ' + professor.materia2, // Ou qualquer outro formato de descrição
+          imagem: "https://static.vecteezy.com/ti/vetor-gratis/p1/11186876-simbolo-de-foto-de-perfil-masculino-vetor.jpg", // Imagem padrão
+        }));
+        setProfessores(professoresData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar professores:", error);
+        setLoading(false);
+      });
   }, []);
 
   return (
