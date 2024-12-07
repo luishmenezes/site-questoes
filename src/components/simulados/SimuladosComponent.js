@@ -3,6 +3,8 @@ import "./SimuladosComponent.css";
 import documentoImg from "../assets/documents.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaEllipsisV } from "react-icons/fa";  
+
 
 const MinhasQuestoesComponent = () => {
   const [mensagemSucesso, setMensagemSucesso] = useState(false);
@@ -14,6 +16,7 @@ const MinhasQuestoesComponent = () => {
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const fetchListas = async () => {
       try {
@@ -24,8 +27,10 @@ const MinhasQuestoesComponent = () => {
       }
     };
 
+
     fetchListas();
   }, []);
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -34,11 +39,14 @@ const MinhasQuestoesComponent = () => {
     }
   };
 
+
   const handleUpload = (file) => {
     const formData = new FormData();
     formData.append("file", file);
 
+
     const apiUrl = "https://bancodequestoes-production.up.railway.app/serviceIA/processar-pdf";
+
 
     axios
       .post(apiUrl, formData)
@@ -51,6 +59,7 @@ const MinhasQuestoesComponent = () => {
       });
   };
 
+
   const handleEnviarParaLista = async (listaId) => {
     try {
       const apiUrl = `https://bancodequestoes-production.up.railway.app/listas/salvar-questoes-do-pdf/${listaId}`;
@@ -62,6 +71,7 @@ const MinhasQuestoesComponent = () => {
       console.error("Erro ao salvar questões na lista:", error.response || error.message || error);
     }
   };
+
 
   const handleAddList = async () => {
     try {
@@ -76,11 +86,18 @@ const MinhasQuestoesComponent = () => {
     }
   };
 
+
+  const handleCloseModal = () => {
+    setModalListasOpen(false);
+    setModalAddListOpen(false);
+  };
+
+
   return (
     <div>
       <div className="containerr">
         {mensagemSucesso && (
-          <div className="alert-mensagem">Operação realizada com sucesso!</div>
+          <div className="alert-mensagem">Questões adicionadas com sucesso!</div>
         )}
         <div className="scanner">
           <img src={documentoImg} alt="Scanner Icon" className="scanner-icon" />
@@ -102,6 +119,13 @@ const MinhasQuestoesComponent = () => {
           <h2>Listas Disponíveis</h2>
           {listas.map((lista) => (
             <div key={lista.id} className="questao-card">
+              <div className="ellipsis-icon">
+                <FaEllipsisV />
+                <div className="options">
+                  <button onClick={() => console.log("Editar Lista")}>Editar</button>
+                  <button onClick={() => console.log("Deletar Lista")}>Deletar</button>
+                </div>
+              </div>
               <p className="lista-de">{lista.titulo || "Lista sem título"}</p>
               <div className="perfil">
                 <img src={documentoImg} alt="Lista Icon" className="foto" />
@@ -118,30 +142,41 @@ const MinhasQuestoesComponent = () => {
         </div>
       </div>
 
+
       {modalListasOpen && (
         <div className="modal-overlay">
-          <div className="modal">
+          <div className="modal-content">
             <h2>Selecione a Lista</h2>
             <div className="questoes-container">
-              {listas.map((lista) => (
-                <div key={lista.id} className="questao-card">
-                  <p className="lista-de">{lista.titulo || "Lista sem título"}</p>
-                  <button
-                    className="acessar-button"
-                    onClick={() => handleEnviarParaLista(lista.id)}
-                  >
-                    Enviar para esta Lista
-                  </button>
-                </div>
-              ))}
+              {listas.length > 0 ? (
+                listas.map((lista) => (
+                  <div key={lista.id} className="questao-card">
+                    <p className="lista-de">{lista.titulo || "Lista sem título"}</p>
+                    <button
+                      className="acessar-button"
+                      onClick={() => handleEnviarParaLista(lista.id)}
+                    >
+                      Enviar para esta Lista
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p className="empty-message">Nenhuma lista disponível.</p>
+              )}
+            </div>
+            <div className="modal-actions">
+              <button className="modal-button cancelar" onClick={handleCloseModal}>
+                Cancelar
+              </button>
             </div>
           </div>
         </div>
       )}
 
+
       {modalAddListOpen && (
         <div className="modal-overlay">
-          <div className="modal">
+          <div className="modal-content">
             <h2>Criar Nova Lista</h2>
             <input
               type="text"
@@ -151,12 +186,12 @@ const MinhasQuestoesComponent = () => {
               className="modal-input"
             />
             <div className="modal-actions">
-              <button className="modal-button" onClick={handleAddList}>
+              <button className="modal-button salvar" onClick={handleAddList}>
                 Salvar
               </button>
               <button
-                className="modal-button cancel"
-                onClick={() => setModalAddListOpen(false)}
+                className="modal-button cancelar"
+                onClick={handleCloseModal}
               >
                 Cancelar
               </button>
@@ -167,5 +202,6 @@ const MinhasQuestoesComponent = () => {
     </div>
   );
 };
+
 
 export default MinhasQuestoesComponent;
