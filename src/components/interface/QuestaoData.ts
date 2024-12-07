@@ -3,5 +3,6 @@ export interface QuestaoData {
     cabecalho: string;
     enunciado: string;
     alternativas: string[];
+    gabarito: number;
   }
   
