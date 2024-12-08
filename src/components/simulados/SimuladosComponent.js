@@ -3,34 +3,42 @@ import "./SimuladosComponent.css";
 import documentoImg from "../assets/documents.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { FaEllipsisV } from "react-icons/fa";  
-
+import { FaEllipsisV } from "react-icons/fa";
 
 const MinhasQuestoesComponent = () => {
   const [mensagemSucesso, setMensagemSucesso] = useState(false);
   const [listas, setListas] = useState([]);
   const [modalListasOpen, setModalListasOpen] = useState(false);
   const [modalAddListOpen, setModalAddListOpen] = useState(false);
+  const [modalEditListOpen, setModalEditListOpen] = useState(false); // Novo estado para abrir o modal de edição
   const [novoTitulo, setNovoTitulo] = useState("");
   const [questoes, setQuestoes] = useState([]);
+  const [menuAberto, setMenuAberto] = useState(null); // Define qual menu está aberto
+  const [listaParaEditar, setListaParaEditar] = useState(null); // Estado para armazenar a lista que está sendo editada
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const fetchListas = async () => {
       try {
-        const response = await axios.get("https://bancodequestoes-production.up.railway.app/listas/professor/1");
+        const response = await axios.get(
+          "https://bancodequestoes-production.up.railway.app/listas/professor/1"
+        );
         setListas(response.data);
       } catch (error) {
-        console.error("Erro ao buscar as listas:", error.response || error.message || error);
+        console.error(
+          "Erro ao buscar as listas:",
+          error.response || error.message || error
+        );
       }
     };
 
-
     fetchListas();
   }, []);
-
+  const handleOpenAddListModal = () => {
+    setNovoTitulo(""); // Limpa o estado quando o modal é aberto
+    setModalAddListOpen(true);
+  };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -39,14 +47,13 @@ const MinhasQuestoesComponent = () => {
     }
   };
 
-
   const handleUpload = (file) => {
     const formData = new FormData();
     formData.append("file", file);
 
 
-    const apiUrl = "https://bancodequestoes-production.up.railway.app/serviceIA/processar-pdf";
-
+    const apiUrl =
+      "https://bancodequestoes-production.up.railway.app/serviceIA/processar-pdf";
 
     axios
       .post(apiUrl, formData)
@@ -55,10 +62,12 @@ const MinhasQuestoesComponent = () => {
         setModalListasOpen(true);
       })
       .catch((error) => {
-        console.error("Erro ao processar o PDF:", error.response || error.message || error);
+        console.error(
+          "Erro ao processar o PDF:",
+          error.response || error.message || error
+        );
       });
   };
-
 
   const handleEnviarParaLista = async (listaId) => {
     try {
@@ -68,30 +77,83 @@ const MinhasQuestoesComponent = () => {
       setTimeout(() => setMensagemSucesso(false), 5000);
       setModalListasOpen(false);
     } catch (error) {
-      console.error("Erro ao salvar questões na lista:", error.response || error.message || error);
+      console.error(
+        "Erro ao salvar questões na lista:",
+        error.response || error.message || error
+      );
     }
   };
 
-
   const handleAddList = async () => {
     try {
-      const response = await axios.post(`https://bancodequestoes-production.up.railway.app/listas?titulo=${novoTitulo}&professorId=1`);
+      const response = await axios.post(
+        `https://bancodequestoes-production.up.railway.app/listas?titulo=${novoTitulo}&professorId=1`
+      );
       setListas((prevListas) => [...prevListas, response.data]);
       setNovoTitulo("");
       setModalAddListOpen(false);
       setMensagemSucesso(true);
       setTimeout(() => setMensagemSucesso(false), 5000);
     } catch (error) {
-      console.error("Erro ao adicionar lista:", error.response || error.message || error);
+      console.error(
+        "Erro ao adicionar lista:",
+        error.response || error.message || error
+      );
     }
   };
 
+  const handleDeletarLista = async (listaId) => {
+    try {
+      await axios.delete(
+        `https://bancodequestoes-production.up.railway.app/listas/${listaId}`
+      );
+      setListas((prevListas) =>
+        prevListas.filter((lista) => lista.id !== listaId)
+      );
+    } catch (error) {
+      console.error(
+        `Erro ao deletar lista com ID ${listaId}:`,
+        error.response || error.message || error
+      );
+    }
+  };
+
+  const handleEditarLista = (lista) => {
+    setListaParaEditar(lista);
+    setNovoTitulo(lista.titulo); // Preenche o campo de input com o título atual da lista
+    setModalEditListOpen(true); // Abre o modal de edição
+  };
+
+  const handleConfirmarEdicao = async () => {
+    try {
+      const response = await axios.put(
+        `https://bancodequestoes-production.up.railway.app/listas/${listaParaEditar.id}?novoTitulo=${encodeURIComponent(novoTitulo)}`
+      );
+      setListas((prevListas) =>
+        prevListas.map((lista) =>
+          lista.id === listaParaEditar.id ? { ...lista, titulo: response.data.titulo } : lista
+        )
+      );
+      setModalEditListOpen(false);
+      setMensagemSucesso(true);
+      setTimeout(() => setMensagemSucesso(false), 5000);
+    } catch (error) {
+      console.error(
+        `Erro ao editar lista com ID ${listaParaEditar.id}:`,
+        error.response || error.message || error
+      );
+    }
+  };
+
+  const toggleMenu = (id) => {
+    setMenuAberto(menuAberto === id ? null : id);
+  };
 
   const handleCloseModal = () => {
     setModalListasOpen(false);
     setModalAddListOpen(false);
+    setModalEditListOpen(false); // Fechar o modal de edição
   };
-
 
   return (
     <div>
@@ -112,19 +174,32 @@ const MinhasQuestoesComponent = () => {
             Scannerar Documento
           </button>
         </div>
-        <button className="adicionar-lista-button" onClick={() => setModalAddListOpen(true)}>
+        <button className="adicionar-lista-button" onClick={handleOpenAddListModal}>
           Adicionar Nova Lista
         </button>
         <div className="questoes-container">
           <h2>Listas Disponíveis</h2>
           {listas.map((lista) => (
             <div key={lista.id} className="questao-card">
-              <div className="ellipsis-icon">
+              <div className="ellipsis-icon" onClick={() => toggleMenu(lista.id)}>
                 <FaEllipsisV />
-                <div className="options">
-                  <button onClick={() => console.log("Editar Lista")}>Editar</button>
-                  <button onClick={() => console.log("Deletar Lista")}>Deletar</button>
-                </div>
+                {menuAberto === lista.id && (
+                  <div className="menu-dropdown">
+                    <button
+                      onClick={() => handleEditarLista(lista)} // Abre o modal de edição
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDeletarLista(lista.id);
+                        toggleMenu(null);
+                      }}
+                    >
+                      Deletar
+                    </button>
+                  </div>
+                )}
               </div>
               <p className="lista-de">{lista.titulo || "Lista sem título"}</p>
               <div className="perfil">
@@ -141,7 +216,6 @@ const MinhasQuestoesComponent = () => {
           ))}
         </div>
       </div>
-
 
       {modalListasOpen && (
         <div className="modal-overlay">
@@ -173,7 +247,6 @@ const MinhasQuestoesComponent = () => {
         </div>
       )}
 
-
       {modalAddListOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -189,10 +262,30 @@ const MinhasQuestoesComponent = () => {
               <button className="modal-button salvar" onClick={handleAddList}>
                 Salvar
               </button>
-              <button
-                className="modal-button cancelar"
-                onClick={handleCloseModal}
-              >
+              <button className="modal-button cancelar" onClick={handleCloseModal}>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {modalEditListOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Editar Lista</h2>
+            <input
+              type="text"
+              value={novoTitulo}
+              onChange={(e) => setNovoTitulo(e.target.value)}
+              placeholder="Novo Título da Lista"
+              className="modal-input"
+            />
+            <div className="modal-actions">
+              <button className="modal-button salvar" onClick={handleConfirmarEdicao}>
+                Confirmar
+              </button>
+              <button className="modal-button cancelar" onClick={handleCloseModal}>
                 Cancelar
               </button>
             </div>
@@ -202,6 +295,5 @@ const MinhasQuestoesComponent = () => {
     </div>
   );
 };
-
 
 export default MinhasQuestoesComponent;
