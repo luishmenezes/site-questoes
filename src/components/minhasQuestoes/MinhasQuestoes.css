@@ -1,3 +1,5 @@
+
+
 .questions-container {
   display: flex;
   flex-direction: column;
@@ -5,87 +7,102 @@
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
+  background-color: #f9fafa;
+  border-radius: 10px;
 }
+
 
 .question-card {
   background-color: #ffffff;
   border-radius: 10px;
   border: 1px solid #ddd;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+
 
 .question-card:hover {
   transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+
 .header {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   color: #2a3d66;
   margin-bottom: 15px;
+  text-align: center;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
 }
+
 
 .enunciado {
   font-size: 16px;
   color: #555;
   margin-bottom: 15px;
   line-height: 1.6;
+  text-align: justify;
 }
+
 
 .alternativas {
   list-style-type: none;
   padding: 0;
 }
 
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; 
-  background-color: #f0f4f8; 
-  color: #1677FF; 
-  font-family: Arial, sans-serif;
-  font-size: 18px;
+
+.alternativa {
+  padding: 12px 15px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #ffffff;
 }
 
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 6px solid #e0e0e0; 
-  border-top: 6px solid #1677FF;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 10px;
+
+.alternativa:hover {
+  background-color: #f4f4f4;
+  transform: translateY(-2px);
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.alternativa.selected {
+  background-color: #e0f0ff;
+  border-color: #87cefa;
 }
 
-.loading-message {
-  color: #555;
-  text-align: center;
+
+.alternativa.correct {
+  background-color: #d4edda; /* Verde */
+  border-color: #c3e6cb;
+}
+
+
+.alternativa.incorrect {
+  background-color: #f8d7da; /* Vermelho */
+  border-color: #f5c6cb;
+}
+
+
+.verify-button {
+  background-color: #1677ff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
   margin-top: 10px;
 }
 
-.alternativa {
-  font-size: 14px;
-  color: #333;
-  padding: 5px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  margin: 5px 0;
-  transition: background-color 0.3s ease;
-}
 
-.alternativa:hover {
-  background-color: #e0e0e0;
+.verify-button:hover {
+  background-color: #125dbb;
 }

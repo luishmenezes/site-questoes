@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import './MinhasQuestoes.css'; 
+import './MinhasQuestoes.css';
+
 
 const QuestionsComponent = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedAnswers, setSelectedAnswers] = useState({}); // Respostas selecionadas
+  const [results, setResults] = useState({}); // Resultados por questão
+
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -19,8 +23,27 @@ const QuestionsComponent = () => {
       }
     };
 
+
     fetchQuestions();
   }, []);
+
+
+  const handleSelectAnswer = (questionId, selectedIndex) => {
+    setSelectedAnswers((prev) => ({
+      ...prev,
+      [questionId]: selectedIndex,
+    }));
+  };
+
+
+  const handleVerifyAnswer = (questionId, gabarito) => {
+    const selectedIndex = selectedAnswers[questionId];
+    setResults((prev) => ({
+      ...prev,
+      [questionId]: selectedIndex === gabarito,
+    }));
+  };
+
 
   return (
     <div>
@@ -47,11 +70,33 @@ const QuestionsComponent = () => {
                   <p className="enunciado">{question.enunciado}</p>
                   <ul className="alternativas">
                     {question.alternativas.map((alternativa, index) => (
-                      <li key={index} className="alternativa">
+                      <li
+                        key={index}
+                        className={`alternativa ${
+                          results[question.id] !== undefined
+                            ? index === question.gabarito
+                              ? "correct"
+                              : index === selectedAnswers[question.id]
+                              ? "incorrect"
+                              : ""
+                            : selectedAnswers[question.id] === index
+                            ? "selected"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handleSelectAnswer(question.id, index)
+                        }
+                      >
                         {alternativa}
                       </li>
                     ))}
                   </ul>
+                  <button
+                    className="verify-button"
+                    onClick={() => handleVerifyAnswer(question.id, question.gabarito)}
+                  >
+                    Verificar Resposta
+                  </button>
                 </div>
               </div>
             ))}
@@ -61,5 +106,6 @@ const QuestionsComponent = () => {
     </div>
   );
 };
+
 
 export default QuestionsComponent;
