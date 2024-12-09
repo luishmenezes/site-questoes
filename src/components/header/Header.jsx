@@ -1,3 +1,7 @@
+
+
+
+
 import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -10,11 +14,14 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
+
 const settings = ["Perfil", "Conta", "Dashboard", "Sair"];
+
 
 function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [userName, setUserName] = useState("");
+
 
   useEffect(() => {
     const nome = localStorage.getItem("nome");
@@ -25,19 +32,23 @@ function ResponsiveAppBar() {
     }
   }, []);
 
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1 }} />
+
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography

@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -6,7 +7,35 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
+
 export default function BasicCard() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        "https://bancodequestoes-production.up.railway.app/professor/login",
+        { email, senha }
+      );
+
+
+      const { id } = response.data;
+
+
+      // Salva o id no localStorage
+      localStorage.setItem("usuarioId", id);
+
+
+      // Mostra o id no console
+      console.log("Usuário logado com ID:", id);
+    } catch (error) {
+      console.error("Erro ao fazer login:", error.response?.data || error.message);
+    }
+  };
+
+
   return (
     <Box
       sx={{
@@ -35,6 +64,7 @@ export default function BasicCard() {
         }}
       />
 
+
       <Card
         sx={{
           minWidth: 100,
@@ -61,6 +91,7 @@ export default function BasicCard() {
             <h3>Login</h3>
           </Typography>
 
+
           <Box
             component="form"
             sx={{
@@ -75,6 +106,8 @@ export default function BasicCard() {
               placeholder="Email"
               type="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               style={{
                 padding: "12px 16px",
                 fontSize: "16px",
@@ -87,6 +120,8 @@ export default function BasicCard() {
               placeholder="Senha"
               type="password"
               name="senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
               style={{
                 padding: "12px 16px",
                 fontSize: "16px",
@@ -98,7 +133,7 @@ export default function BasicCard() {
           </Box>
         </CardContent>
         <CardActions sx={{ justifyContent: "center", mt: 2 }}>
-          <Button variant="contained" color="primary" size="large">
+          <Button variant="contained" color="primary" size="large" onClick={handleLogin}>
             Entrar
           </Button>
         </CardActions>
