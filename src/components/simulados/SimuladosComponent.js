@@ -5,24 +5,38 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaEllipsisV } from "react-icons/fa";
 
+
 const MinhasQuestoesComponent = () => {
   const [mensagemSucesso, setMensagemSucesso] = useState(false);
   const [listas, setListas] = useState([]);
   const [modalListasOpen, setModalListasOpen] = useState(false);
   const [modalAddListOpen, setModalAddListOpen] = useState(false);
-  const [modalEditListOpen, setModalEditListOpen] = useState(false); // Novo estado para abrir o modal de edição
+  const [modalEditListOpen, setModalEditListOpen] = useState(false); 
   const [novoTitulo, setNovoTitulo] = useState("");
   const [questoes, setQuestoes] = useState([]);
-  const [menuAberto, setMenuAberto] = useState(null); // Define qual menu está aberto
-  const [listaParaEditar, setListaParaEditar] = useState(null); // Estado para armazenar a lista que está sendo editada
+  const [menuAberto, setMenuAberto] = useState(null); 
+  const [listaParaEditar, setListaParaEditar] = useState(null); 
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
+
   useEffect(() => {
+    
+    const professorId = localStorage.getItem("usuarioId");
+
+
+    if (!professorId) {
+      console.error("Nenhum ID de professor encontrado no localStorage!");
+      return;
+    }
+
+    console.log("ID do professor logado:", professorId);
+
+
     const fetchListas = async () => {
       try {
         const response = await axios.get(
-          "https://bancodequestoes-production.up.railway.app/listas/professor/1"
+          `https://bancodequestoes-production.up.railway.app/listas/professor/${professorId}`
         );
         setListas(response.data);
       } catch (error) {
@@ -33,12 +47,14 @@ const MinhasQuestoesComponent = () => {
       }
     };
 
+
     fetchListas();
   }, []);
   const handleOpenAddListModal = () => {
-    setNovoTitulo(""); // Limpa o estado quando o modal é aberto
+    setNovoTitulo(""); 
     setModalAddListOpen(true);
   };
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -47,6 +63,7 @@ const MinhasQuestoesComponent = () => {
     }
   };
 
+
   const handleUpload = (file) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -54,6 +71,7 @@ const MinhasQuestoesComponent = () => {
 
     const apiUrl =
       "https://bancodequestoes-production.up.railway.app/serviceIA/processar-pdf";
+
 
     axios
       .post(apiUrl, formData)
@@ -68,6 +86,7 @@ const MinhasQuestoesComponent = () => {
         );
       });
   };
+
 
   const handleEnviarParaLista = async (listaId) => {
     try {
@@ -84,23 +103,35 @@ const MinhasQuestoesComponent = () => {
     }
   };
 
+
   const handleAddList = async () => {
     try {
+      const professorId = localStorage.getItem("usuarioId");
+ 
+      if (!professorId) {
+        console.error("Nenhum ID de professor encontrado no localStorage!");
+        return;
+      }
+ 
       const response = await axios.post(
-        `https://bancodequestoes-production.up.railway.app/listas?titulo=${novoTitulo}&professorId=1`
+        `https://bancodequestoes-production.up.railway.app/listas?titulo=${novoTitulo}&professorId=${professorId}`
       );
+ 
       setListas((prevListas) => [...prevListas, response.data]);
       setNovoTitulo("");
       setModalAddListOpen(false);
       setMensagemSucesso(true);
+ 
       setTimeout(() => setMensagemSucesso(false), 5000);
     } catch (error) {
       console.error(
         "Erro ao adicionar lista:",
-        error.response || error.message || error
+        error.response?.data || error.message || error
       );
     }
   };
+ 
+
 
   const handleDeletarLista = async (listaId) => {
     try {
@@ -118,11 +149,13 @@ const MinhasQuestoesComponent = () => {
     }
   };
 
+
   const handleEditarLista = (lista) => {
     setListaParaEditar(lista);
-    setNovoTitulo(lista.titulo); // Preenche o campo de input com o título atual da lista
-    setModalEditListOpen(true); // Abre o modal de edição
+    setNovoTitulo(lista.titulo); 
+    setModalEditListOpen(true);
   };
+
 
   const handleConfirmarEdicao = async () => {
     try {
@@ -145,15 +178,18 @@ const MinhasQuestoesComponent = () => {
     }
   };
 
+
   const toggleMenu = (id) => {
     setMenuAberto(menuAberto === id ? null : id);
   };
 
+
   const handleCloseModal = () => {
     setModalListasOpen(false);
     setModalAddListOpen(false);
-    setModalEditListOpen(false); // Fechar o modal de edição
+    setModalEditListOpen(false);
   };
+
 
   return (
     <div>
@@ -186,7 +222,7 @@ const MinhasQuestoesComponent = () => {
                 {menuAberto === lista.id && (
                   <div className="menu-dropdown">
                     <button
-                      onClick={() => handleEditarLista(lista)} // Abre o modal de edição
+                      onClick={() => handleEditarLista(lista)} 
                     >
                       Editar
                     </button>
@@ -216,6 +252,7 @@ const MinhasQuestoesComponent = () => {
           ))}
         </div>
       </div>
+
 
       {modalListasOpen && (
         <div className="modal-overlay">
@@ -247,6 +284,7 @@ const MinhasQuestoesComponent = () => {
         </div>
       )}
 
+
       {modalAddListOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -269,6 +307,7 @@ const MinhasQuestoesComponent = () => {
           </div>
         </div>
       )}
+
 
       {modalEditListOpen && (
         <div className="modal-overlay">
@@ -295,5 +334,6 @@ const MinhasQuestoesComponent = () => {
     </div>
   );
 };
+
 
 export default MinhasQuestoesComponent;

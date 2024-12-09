@@ -39,16 +39,14 @@ const CadastroProfessorComponent = () => {
 
 
       if (response.status === 200) {
-        // Salva os dados no localStorage
         const { nome, email } = values;
-        const { token, id } = response.data; // Ajuste conforme a resposta do back-end
+        const { token, id } = response.data;
 
 
-        // Armazenando os dados no localStorage
         localStorage.setItem("nome", nome);
         localStorage.setItem("email", email);
         localStorage.setItem("token", token);
-        localStorage.setItem("usuarioId", id); // Salvando o ID do professor
+        localStorage.setItem("usuarioId", id);
 
 
         message.success("Cadastro realizado com sucesso!");

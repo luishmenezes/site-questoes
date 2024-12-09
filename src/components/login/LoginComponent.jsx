@@ -24,11 +24,8 @@ export default function BasicCard() {
       const { id } = response.data;
 
 
-      // Salva o id no localStorage
       localStorage.setItem("usuarioId", id);
-
-
-      // Mostra o id no console
+      
       console.log("Usuário logado com ID:", id);
     } catch (error) {
       console.error("Erro ao fazer login:", error.response?.data || error.message);
