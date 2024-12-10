@@ -13,6 +13,8 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 const settings = ["Perfil", "Conta", "Dashboard", "Sair"];
@@ -21,6 +23,7 @@ const settings = ["Perfil", "Conta", "Dashboard", "Sair"];
 function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [userName, setUserName] = useState("");
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -42,13 +45,38 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem("token");
+     if (token) {
+      await axios.post(
+        "https://bancodequestoes-production.up.railway.app/estudantes/logout",
+        {},
+        {
+          headers: {Authorization: `Bearer ${token}` },
+        }
+      );
+    }
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("nome");
+
+    navigate("/home");
+    window.location.reload();
+    console.log("logout sucesso!")
+  } catch (error){
+    console.error("Erro ao fazer logout: ", error);
+  } finally {
+    handleCloseUserMenu();
+  }
+  };
+
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1 }} />
-
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography
@@ -78,11 +106,17 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              {settings.map((setting) =>
+                setting === "Sair" ? (
+                  <MenuItem key={setting} onClick={handleLogout}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ) : (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                )
+              )}
             </Menu>
           </Box>
         </Toolbar>
@@ -90,4 +124,5 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;

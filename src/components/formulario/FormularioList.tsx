@@ -16,8 +16,12 @@ const Forms: FC = () => {
     //autenticacao aq
   };
 
-  const handleIrlogin = () => {
+  const handleIrloginProfessor = () => {
     navigate("/login");
+  };
+
+  const handleIrloginEstudante = () => {
+    navigate("/loginEstudante");
   };
 
   return (
@@ -56,7 +60,19 @@ const Forms: FC = () => {
           Login com Google
         </Button>
         <Button
-          onClick={handleIrlogin}
+          onClick={handleIrloginProfessor}
+          variant="outlined"
+          fullWidth
+          sx={{
+            backgroundColor: "#0455BF",
+            color: "#fff",
+            marginBottom: 1
+          }}
+        >
+          Login como Professor
+        </Button>
+        <Button
+          onClick={handleIrloginEstudante}
           variant="outlined"
           fullWidth
           sx={{
@@ -64,7 +80,7 @@ const Forms: FC = () => {
             color: "#fff", 
           }}
         >
-          Login com Plataforma
+          Login como aluno
         </Button>
       </Card>
     </Box>

@@ -16,7 +16,7 @@ export default function BasicCard() {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "https://bancodequestoes-production.up.railway.app/professor/login",
+        "https://bancodequestoes-production.up.railway.app/estudante/login",
         { email, senha }
       );
 
@@ -50,7 +50,7 @@ export default function BasicCard() {
     >
       <Box
         component="img"
-        src="ProfessorLogin.jpg"
+        src="AlunoLogin.jpg"
         alt="Imagem ao lado do card"
         sx={{
           width: { xs: 0, sm: "30%" },
@@ -85,7 +85,7 @@ export default function BasicCard() {
             component="div"
             sx={{ textAlign: "center", mb: 3.5, color: "white" }}
           >
-            <h3>Login Professor</h3>
+            <h3>Login Aluno</h3>
           </Typography>
 
 

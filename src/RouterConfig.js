@@ -18,6 +18,7 @@ import Form from './components/formulario/FormularioList';
 import ConfigAlunoComponent from './components/configuracao/ConfigAlunoComponent';
 import ConfigEscolaComponent from './components/configuracao/ConfigEscolaComponent';
 import ConfigProfessorComponent from './components/configuracao/ConfigProfessorComponent';
+import LoginEstudanteComponent from './components/login/LoginEstudanteComponent';
 
 const RouterConfig = () => {
   return (
@@ -39,6 +40,7 @@ const RouterConfig = () => {
       <Route path="/configAluno" element={<LayoutComponent><ConfigAlunoComponent /></LayoutComponent>} />
       <Route path="/configEscola" element={<LayoutComponent><ConfigEscolaComponent /></LayoutComponent>} />
       <Route path="/configProfessor" element={<LayoutComponent><ConfigProfessorComponent /></LayoutComponent>} />
+      <Route path="/loginEstudante" element={<LayoutComponent><LoginEstudanteComponent /></LayoutComponent>}/>
     </Routes>
   );
 };
