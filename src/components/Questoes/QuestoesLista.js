@@ -4,7 +4,7 @@ import axios from "axios";
 import "./QuestoesLista.css";
 
 const QuestoesLista = () => {
-  const { id } = useParams(); // ID da lista
+  const { id } = useParams();
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
