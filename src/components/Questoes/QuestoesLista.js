@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import "./QuestoesLista.css";
 
 const QuestoesLista = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // ID da lista
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedAnswers, setSelectedAnswers] = useState({}); 
-  const [results, setResults] = useState({}); 
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [results, setResults] = useState({});
+  const userId = localStorage.getItem("userId");
+
+  console.log("Usuário logado com ID:", userId);
+
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(
+        const response = await axios.get(
           `https://bancodequestoes-production.up.railway.app/listas/${id}/questoes`
         );
-        const data = await response.json();
-        setQuestions(data);
+        setQuestions(response.data);
         setLoading(false);
       } catch (error) {
         setError("Erro ao carregar questões");
@@ -28,20 +32,56 @@ const QuestoesLista = () => {
     fetchQuestions();
   }, [id]);
 
+  // Registrar estudante na lista
+  const handleRegisterToList = async () => {
+    try {
+      // Enviar o estudanteId como um parâmetro de consulta na URL
+      await axios.post(
+        `https://bancodequestoes-production.up.railway.app/listas/${id}/estudantes?estudanteId=2`
+      );
+      alert("Estudante registrado na lista com sucesso!");
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao registrar estudante na lista.");
+    }
+  };
+  
+
+  // Salvar resposta do estudante
+  const saveAnswer = async (questionId, isCorrect) => {
+    try {
+      await axios.post(
+        "https://bancodequestoes-production.up.railway.app/enviaresposta",
+        {
+          questaoId: questionId,
+          estudanteId: userId,
+          resposta: isCorrect,
+        }
+      );
+    } catch (error) {
+      console.error("Erro ao enviar resposta:", error);
+    }
+  };
+
+  // Verificar respostas e enviar dados
+  const handleVerifyAnswers = () => {
+    const newResults = {};
+    questions.forEach((question) => {
+      const selectedIndex = selectedAnswers[question.id];
+      const isCorrect = selectedIndex === question.gabarito;
+      newResults[question.id] = isCorrect;
+
+      // Enviar resposta ao backend
+      saveAnswer(question.id, isCorrect);
+    });
+    setResults(newResults);
+  };
+
   const handleSelectAnswer = (questionId, selectedIndex) => {
     setSelectedAnswers((prev) => ({
       ...prev,
       [questionId]: selectedIndex,
     }));
-  };
-
-  const handleVerifyAnswers = () => {
-    const newResults = {};
-    questions.forEach((question) => {
-      const selectedIndex = selectedAnswers[question.id];
-      newResults[question.id] = selectedIndex === question.gabarito;
-    });
-    setResults(newResults);
   };
 
   return (
@@ -61,6 +101,9 @@ const QuestoesLista = () => {
         <div>
           <div style={{ textAlign: "center", marginBottom: "20px" }}>
             <h1>Questões da Lista</h1>
+            <button className="register-button" onClick={handleRegisterToList}>
+              Registrar Estudante na Lista
+            </button>
           </div>
           <div className="questions-container">
             {questions.map((question) => (
@@ -108,6 +151,5 @@ const QuestoesLista = () => {
     </div>
   );
 };
-
 
 export default QuestoesLista;

@@ -18,7 +18,7 @@ const Cadastro = () => {
       message.error("Por favor, preencha todos os campos!");
       return;
     }
-
+  
     const data = {
       nome: nome.toString(),
       email: email.toString(),
@@ -26,7 +26,7 @@ const Cadastro = () => {
       dataNascimento: dataNascimento.toString(),
       instituicao: instituicao.toString(),
     };
-
+  
     try {
       const response = await axios.post(
         "https://bancodequestoes-production.up.railway.app/estudantes/cadastro",
@@ -37,16 +37,22 @@ const Cadastro = () => {
           },
         }
       );
-      localStorage.setItem("token", response);
+      
+      // Salvar o ID do estudante no localStorage
+      localStorage.setItem("estudanteId", response.data.id);  // Aqui você salva o ID do estudante
+  
+      // Salvar o token, caso seja necessário
+      localStorage.setItem("token", response.data.token);  // Ou qualquer outro dado necessário
+  
       console.log("Cadastro realizado com sucesso -> ", response.data);
       message.success("Cadastro realizado com sucesso!!!");
-      navigate("/home");
+      navigate("/home"); // Redireciona para a página inicial após o cadastro
     } catch (error) {
       if (error.response) {
         console.error("Erro no back-end -> ", error.response.data);
       } else if (error.request) {
         console.error("erro servidor", error.request);
-        message.error("Erro na rede. tente novamente");
+        message.error("Erro na rede. Tente novamente.");
       } else {
         console.error("erro ao configurar a req:", error.message);
       }

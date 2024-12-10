@@ -19,18 +19,17 @@ export default function BasicCard() {
         "https://bancodequestoes-production.up.railway.app/estudante/login",
         { email, senha }
       );
-
-
+  
       const { id } = response.data;
-
-
+  
       localStorage.setItem("usuarioId", id);
-      
+  
       console.log("Usuário logado com ID:", id);
     } catch (error) {
       console.error("Erro ao fazer login:", error.response?.data || error.message);
     }
   };
+  
 
 
   return (
