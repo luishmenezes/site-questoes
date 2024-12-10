@@ -101,9 +101,7 @@ const QuestoesLista = () => {
         <div>
           <div style={{ textAlign: "center", marginBottom: "20px" }}>
             <h1>Questões da Lista</h1>
-            <button className="register-button" onClick={handleRegisterToList}>
-              Registrar Estudante na Lista
-            </button>
+           
           </div>
           <div className="questions-container">
             {questions.map((question) => (
