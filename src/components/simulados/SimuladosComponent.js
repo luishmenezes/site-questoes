@@ -36,7 +36,7 @@ const MinhasQuestoesComponent = () => {
     const fetchListas = async () => {
       try {
         const response = await axios.get(
-          `https://bancodequestoes-production.up.railway.app/listas/professor/${professorId}`
+          `http://localhost:8080/listas/professor/${professorId}`
         );
         setListas(response.data);
       } catch (error) {
@@ -70,7 +70,7 @@ const MinhasQuestoesComponent = () => {
 
 
     const apiUrl =
-      "https://bancodequestoes-production.up.railway.app/serviceIA/processar-pdf";
+      "http://localhost:8080/serviceIA/processar-pdf";
 
 
     axios
@@ -90,7 +90,7 @@ const MinhasQuestoesComponent = () => {
 
   const handleEnviarParaLista = async (listaId) => {
     try {
-      const apiUrl = `https://bancodequestoes-production.up.railway.app/listas/salvar-questoes-do-pdf/${listaId}`;
+      const apiUrl = `http://localhost:8080/listas/salvar-questoes-do-pdf/${listaId}`;
       await axios.post(apiUrl, { listaId, questoes });
       setMensagemSucesso(true);
       setTimeout(() => setMensagemSucesso(false), 5000);
@@ -114,7 +114,7 @@ const MinhasQuestoesComponent = () => {
       }
  
       const response = await axios.post(
-        `https://bancodequestoes-production.up.railway.app/listas?titulo=${novoTitulo}&professorId=${professorId}`
+        `http://localhost:8080/listas?titulo=${novoTitulo}&professorId=${professorId}`
       );
  
       setListas((prevListas) => [...prevListas, response.data]);
@@ -136,7 +136,7 @@ const MinhasQuestoesComponent = () => {
   const handleDeletarLista = async (listaId) => {
     try {
       await axios.delete(
-        `https://bancodequestoes-production.up.railway.app/listas/${listaId}`
+        `http://localhost:8080/listas/${listaId}`
       );
       setListas((prevListas) =>
         prevListas.filter((lista) => lista.id !== listaId)
@@ -160,7 +160,7 @@ const MinhasQuestoesComponent = () => {
   const handleConfirmarEdicao = async () => {
     try {
       const response = await axios.put(
-        `https://bancodequestoes-production.up.railway.app/listas/${listaParaEditar.id}?novoTitulo=${encodeURIComponent(novoTitulo)}`
+        `http://localhost:8080/listas/${listaParaEditar.id}?novoTitulo=${encodeURIComponent(novoTitulo)}`
       );
       setListas((prevListas) =>
         prevListas.map((lista) =>

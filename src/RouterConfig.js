@@ -19,6 +19,7 @@ import ConfigAlunoComponent from './components/configuracao/ConfigAlunoComponent
 import ConfigEscolaComponent from './components/configuracao/ConfigEscolaComponent';
 import ConfigProfessorComponent from './components/configuracao/ConfigProfessorComponent';
 import LoginEstudanteComponent from './components/login/LoginEstudanteComponent';
+import Dashboard from './components/dasbord/DashboardComponent';
 
 const RouterConfig = () => {
   return (
@@ -41,6 +42,7 @@ const RouterConfig = () => {
       <Route path="/configEscola" element={<LayoutComponent><ConfigEscolaComponent /></LayoutComponent>} />
       <Route path="/configProfessor" element={<LayoutComponent><ConfigProfessorComponent /></LayoutComponent>} />
       <Route path="/loginEstudante" element={<LayoutComponent><LoginEstudanteComponent /></LayoutComponent>}/>
+      <Route path="/DasbordLista" element={<LayoutComponent><Dashboard/></LayoutComponent>}/>
     </Routes>
   );
 };

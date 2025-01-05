@@ -39,7 +39,7 @@ const HomeComponent = () => {
 
   useEffect(() => {
 
-    axios.get('https://bancodequestoes-production.up.railway.app/professor/listar') 
+    axios.get('http://localhost:8080/professor/listar') 
       .then((response) => {
         const professoresData = response.data.map(professor => ({
           nome: professor.nome,

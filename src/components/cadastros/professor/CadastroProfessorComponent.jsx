@@ -33,7 +33,7 @@ const CadastroProfessorComponent = () => {
 
     try {
       const response = await axios.post(
-        "https://bancodequestoes-production.up.railway.app/professor/registrar",
+        "http://localhost:8080/professor/registrar",
         payload
       );
 

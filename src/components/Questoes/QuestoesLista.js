@@ -10,7 +10,7 @@ const QuestoesLista = () => {
   const [error, setError] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [results, setResults] = useState({});
-  const userId = localStorage.getItem("userId");
+  const userId = 5;
 
   console.log("Usuário logado com ID:", userId);
 
@@ -19,7 +19,7 @@ const QuestoesLista = () => {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          `https://bancodequestoes-production.up.railway.app/listas/${id}/questoes`
+          `http://localhost:8080/listas/${id}/questoes`
         );
         setQuestions(response.data);
         setLoading(false);
@@ -37,7 +37,7 @@ const QuestoesLista = () => {
     try {
       // Enviar o estudanteId como um parâmetro de consulta na URL
       await axios.post(
-        `https://bancodequestoes-production.up.railway.app/listas/${id}/estudantes?estudanteId=2`
+        `http://localhost:8080/listas/${id}/estudantes?estudanteId=5`
       );
       alert("Estudante registrado na lista com sucesso!");
     } catch (error) {
@@ -51,7 +51,7 @@ const QuestoesLista = () => {
   const saveAnswer = async (questionId, isCorrect) => {
     try {
       await axios.post(
-        "https://bancodequestoes-production.up.railway.app/enviaresposta",
+        "http://localhost:8080/enviaresposta",
         {
           questaoId: questionId,
           estudanteId: userId,

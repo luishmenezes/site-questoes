@@ -50,7 +50,7 @@ function ResponsiveAppBar() {
       const token = localStorage.getItem("token");
      if (token) {
       await axios.post(
-        "https://bancodequestoes-production.up.railway.app/estudantes/logout",
+        "http://localhost:8080/estudantes/logout",
         {},
         {
           headers: {Authorization: `Bearer ${token}` },
