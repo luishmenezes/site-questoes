@@ -6,14 +6,14 @@ const QuestionsComponent = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedAnswers, setSelectedAnswers] = useState({}); // Respostas selecionadas
-  const [results, setResults] = useState({}); // Resultados por questão
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [results, setResults] = useState({});
 
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch("https://bancodequestoes-production.up.railway.app/questao/questoes");
+        const response = await fetch("http://localhost:8080/questao/questoes");
         const data = await response.json();
         setQuestions(data);
         setLoading(false);

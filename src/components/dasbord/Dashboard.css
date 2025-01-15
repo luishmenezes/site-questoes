@@ -1,0 +1,78 @@
+/* Dashboard.css */
+.dashboard-container {
+    padding: 20px;
+    font-family: "Arial, sans-serif";
+  }
+  
+  .dashboard-title {
+    text-align: center;
+    color: #4a90e2;
+  }
+  
+  .input-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .input-container label {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .input-container input {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .button-fetch {
+    background-color: #4a90e2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .button-fetch:hover {
+    background-color: #357ABD;
+  }
+  
+  .error-message {
+    color: red;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .chart-container, .ranking-container {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .table-ranking {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-ranking th, .table-ranking td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .table-ranking th {
+    background-color: #4a90e2;
+    color: white;
+  }
+  
+  .table-ranking tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .table-ranking tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  

@@ -10,7 +10,7 @@ const QuestoesLista = () => {
   const [error, setError] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [results, setResults] = useState({});
-  const userId = 5;
+  const userId = 2;
 
   console.log("Usuário logado com ID:", userId);
 
@@ -32,12 +32,10 @@ const QuestoesLista = () => {
     fetchQuestions();
   }, [id]);
 
-  // Registrar estudante na lista
   const handleRegisterToList = async () => {
     try {
-      // Enviar o estudanteId como um parâmetro de consulta na URL
       await axios.post(
-        `http://localhost:8080/listas/${id}/estudantes?estudanteId=5`
+        `http://localhost:8080/listas/${id}/estudantes?estudanteId=2`
       );
       alert("Estudante registrado na lista com sucesso!");
     } catch (error) {
@@ -46,8 +44,6 @@ const QuestoesLista = () => {
     }
   };
   
-
-  // Salvar resposta do estudante
   const saveAnswer = async (questionId, isCorrect) => {
     try {
       await axios.post(
@@ -63,7 +59,6 @@ const QuestoesLista = () => {
     }
   };
 
-  // Verificar respostas e enviar dados
   const handleVerifyAnswers = () => {
     const newResults = {};
     questions.forEach((question) => {
@@ -71,7 +66,6 @@ const QuestoesLista = () => {
       const isCorrect = selectedIndex === question.gabarito;
       newResults[question.id] = isCorrect;
 
-      // Enviar resposta ao backend
       saveAnswer(question.id, isCorrect);
     });
     setResults(newResults);

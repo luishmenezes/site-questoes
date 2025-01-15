@@ -16,7 +16,7 @@ export default function BasicCard() {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "https://bancodequestoes-production.up.railway.app/professor/login",
+        "http://localhost:8080/professor/login",
         { email, senha }
       );
 
