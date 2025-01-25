@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -16,30 +12,23 @@ import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 const settings = ["Perfil", "Conta", "Dashboard", "Sair"];
-
 
 function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [userName, setUserName] = useState("");
+  const [nome, setUserName] = useState("");
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    const nome = localStorage.getItem("nome");
+    const nome = localStorage.getItem("nomeProf") || localStorage.getItem("nomeEst");
     if (nome) {
       setUserName(nome);
-    } else {
-      setUserName("Usuário");
     }
   }, []);
-
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -48,29 +37,29 @@ function ResponsiveAppBar() {
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("token");
-     if (token) {
-      await axios.post(
-        "http://localhost:8080/estudantes/logout",
-        {},
-        {
-          headers: {Authorization: `Bearer ${token}` },
-        }
-      );
+      if (token) {
+        await axios.post(
+          "http://localhost:8080/estudantes/logout",
+          {},
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+      }
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("nomeEst") || localStorage.removeItem("nomeProf");
+      localStorage.removeItem("EstudanteId") || localStorage.removeItem("ProfessorId");
+
+      navigate("/home");
+      window.location.reload();
+      console.log("logout sucesso!");
+    } catch (error) {
+      console.error("Erro ao fazer logout: ", error);
+    } finally {
+      handleCloseUserMenu();
     }
-
-    localStorage.removeItem("token");
-    localStorage.removeItem("nome");
-
-    navigate("/home");
-    window.location.reload();
-    console.log("logout sucesso!")
-  } catch (error){
-    console.error("Erro ao fazer logout: ", error);
-  } finally {
-    handleCloseUserMenu();
-  }
   };
-
 
   return (
     <AppBar position="static">
@@ -79,15 +68,17 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1 }} />
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography
-              variant="h6"
-              sx={{ color: "white", marginRight: "10px" }}
-            >
-              Olá, {userName}
-            </Typography>
+            {nome && ( 
+              <Typography
+                variant="h6"
+                sx={{ color: "white", marginRight: "10px" }}
+              >
+                Olá, {nome}
+              </Typography>
+            )}
             <Tooltip title="Abrir configurações">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={userName} src="/static/images/avatar/2.jpg" />
+                <Avatar alt={nome} src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu

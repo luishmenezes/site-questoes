@@ -6,12 +6,14 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function BasicCard() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -20,18 +22,41 @@ export default function BasicCard() {
         { email, senha }
       );
 
+      if (response.status === 200) {
+        const { id, nome } = response.data;
+        localStorage.setItem("nomeProf", nome);
+        localStorage.setItem("ProfessorId", id);
 
-      const { id } = response.data;
+        toast.success("Logado com sucesso!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
 
-
-      localStorage.setItem("usuarioId", id);
-      
-      console.log("Usuário logado com ID:", id);
+        setTimeout(() => {
+          navigate("/home");
+        }, 3000); 
+      }
     } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Erro ao fazer login. Tente novamente.",
+        {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
       console.error("Erro ao fazer login:", error.response?.data || error.message);
     }
   };
-
 
   return (
     <Box
@@ -48,6 +73,7 @@ export default function BasicCard() {
         flexDirection: { xs: "column", sm: "row" },
       }}
     >
+      <ToastContainer />
       <Box
         component="img"
         src="ProfessorLogin.jpg"
@@ -60,8 +86,6 @@ export default function BasicCard() {
           display: { xs: "none", sm: "block" },
         }}
       />
-
-
       <Card
         sx={{
           minWidth: 100,
@@ -87,8 +111,6 @@ export default function BasicCard() {
           >
             <h3>Login Professor</h3>
           </Typography>
-
-
           <Box
             component="form"
             sx={{

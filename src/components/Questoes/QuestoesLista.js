@@ -10,7 +10,7 @@ const QuestoesLista = () => {
   const [error, setError] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [results, setResults] = useState({});
-  const userId = 2;
+  const userId = localStorage.getItem("EstudanteId");
 
   console.log("Usuário logado com ID:", userId);
 
@@ -35,7 +35,7 @@ const QuestoesLista = () => {
   const handleRegisterToList = async () => {
     try {
       await axios.post(
-        `http://localhost:8080/listas/${id}/estudantes?estudanteId=2`
+        `http://localhost:8080/listas/${id}/estudantes?estudanteId=${userId}`
       );
       alert("Estudante registrado na lista com sucesso!");
     } catch (error) {
