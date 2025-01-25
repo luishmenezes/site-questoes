@@ -101,3 +101,30 @@
   color: #721c24;
   font-weight: bold;
 }
+.redirect-button {
+  background-color: #4caf50; 
+  color: white;
+  padding: 12px 30px;
+  font-size: 18px; 
+  font-weight: bold;
+  border: none;
+  border-radius: 30px; 
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.redirect-button:hover {
+  background-color: #45a049; 
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.redirect-button:active {
+  transform: translateY(2px); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.redirect-button:focus {
+  outline: none; 
+  border: 2px solid #a0d8a0;
+}

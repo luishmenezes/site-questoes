@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import "./Dashboard.css";
 
@@ -25,7 +26,7 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
-  const [listaId, setListaId] = useState("");
+  const { id } = useParams();
   const [dashboardData, setDashboardData] = useState(null);
   const [error, setError] = useState("");
 
@@ -33,7 +34,7 @@ const Dashboard = () => {
     try {
       setError("");
       const response = await axios.get(
-        `http://localhost:8080/api/dashboard/lista/${listaId}`
+        `http://localhost:8080/api/dashboard/lista/${id}`
       );
       setDashboardData(response.data);
     } catch (err) {
@@ -41,6 +42,12 @@ const Dashboard = () => {
       setDashboardData(null);
     }
   };
+
+  useEffect(() => {
+    if (id) {
+      fetchDashboardData();
+    }
+  }, [id]);
 
   const generateLineChartData = () => {
     if (!dashboardData) return null;
@@ -99,21 +106,6 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <h1 className="dashboard-title">Dashboard</h1>
-
-      <div className="input-container">
-        <label>
-          ID da Lista:
-          <input
-            type="text"
-            value={listaId}
-            onChange={(e) => setListaId(e.target.value)}
-            placeholder="Digite o ID da lista"
-          />
-        </label>
-        <button className="button-fetch" onClick={fetchDashboardData}>
-          Buscar Dashboard
-        </button>
-      </div>
 
       {error && <div className="error-message">{error}</div>}
 

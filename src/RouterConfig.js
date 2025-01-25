@@ -42,7 +42,7 @@ const RouterConfig = () => {
       <Route path="/configEscola" element={<LayoutComponent><ConfigEscolaComponent /></LayoutComponent>} />
       <Route path="/configProfessor" element={<LayoutComponent><ConfigProfessorComponent /></LayoutComponent>} />
       <Route path="/loginEstudante" element={<LayoutComponent><LoginEstudanteComponent /></LayoutComponent>}/>
-      <Route path="/DasbordLista" element={<LayoutComponent><Dashboard/></LayoutComponent>}/>
+      <Route path="/DashboardLista/:id" element={<LayoutComponent><Dashboard/></LayoutComponent>}/>
     </Routes>
   );
 };

@@ -37,16 +37,17 @@ const Cadastro = () => {
           },
         }
       );
+
+      localStorage.setItem("nomeEst",response.data.nome);
       
-      // Salvar o ID do estudante no localStorage
-      localStorage.setItem("estudanteId", response.data.id);  // Aqui você salva o ID do estudante
+      localStorage.setItem("EstudanteId", response.data.id); 
   
-      // Salvar o token, caso seja necessário
-      localStorage.setItem("token", response.data.token);  // Ou qualquer outro dado necessário
+      
+      localStorage.setItem("token", response.data.token); 
   
       console.log("Cadastro realizado com sucesso -> ", response.data);
       message.success("Cadastro realizado com sucesso!!!");
-      navigate("/home"); // Redireciona para a página inicial após o cadastro
+      navigate("/home"); 
     } catch (error) {
       if (error.response) {
         console.error("Erro no back-end -> ", error.response.data);

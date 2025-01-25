@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./QuestoesLista.css";
 
@@ -11,6 +11,7 @@ const QuestoesLista = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [results, setResults] = useState({});
   const userId = localStorage.getItem("EstudanteId");
+  const navigate = useNavigate(); // hook para navegação
 
   console.log("Usuário logado com ID:", userId);
 
@@ -78,6 +79,10 @@ const QuestoesLista = () => {
     }));
   };
 
+  const handleGoToDashboard = () => {
+    navigate(`/DashboardLista/${id}`);
+  };
+
   return (
     <div>
       {loading ? (
@@ -136,6 +141,12 @@ const QuestoesLista = () => {
           <div style={{ textAlign: "center", marginTop: "20px" }}>
             <button className="verify-button" onClick={handleVerifyAnswers}>
               Verificar Respostas
+            </button>
+          </div>
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            {}
+            <button className="redirect-button" onClick={handleGoToDashboard}>
+            Dashboard
             </button>
           </div>
         </div>

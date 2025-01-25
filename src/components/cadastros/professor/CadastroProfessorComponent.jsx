@@ -43,10 +43,10 @@ const CadastroProfessorComponent = () => {
         const { token, id } = response.data;
 
 
-        localStorage.setItem("nome", nome);
+        localStorage.setItem("nomeProf", nome);
         localStorage.setItem("email", email);
         localStorage.setItem("token", token);
-        localStorage.setItem("usuarioId", id);
+        localStorage.setItem("ProfessorId", id);
 
 
         message.success("Cadastro realizado com sucesso!");

@@ -22,7 +22,7 @@ const MinhasQuestoesComponent = () => {
 
   useEffect(() => {
     
-    const professorId = localStorage.getItem("usuarioId");
+    const professorId = localStorage.getItem("ProfessorId");
 
 
     if (!professorId) {
